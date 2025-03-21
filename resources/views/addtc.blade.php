@@ -103,6 +103,7 @@
                     </div>
                 </div>
             @endif
+            {{-- Size Chart --}}
             <div class="flex flex-col  px-4 my-4">
                 @if (!empty($product->size_chart))
                     <div class="mb-3">
