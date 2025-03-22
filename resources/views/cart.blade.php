@@ -130,7 +130,17 @@
             let totalPay = 0; // Initialize total amount
 
             cartItems.forEach(item => {
+                let imagePath = "/default-image.jpg"; // Default fallback
                 
+                // Ensure image is correctly parsed from JSON
+                try {
+                    let imageArray = JSON.parse(item.image.replace(/&quot;/g, '"')); // Convert encoded quotes
+                    if (Array.isArray(imageArray) && imageArray.length > 0) {
+                        imagePath = `/${imageArray[0]}`; // Get the first image
+                    }
+                } catch (error) {
+                    console.error("Error parsing image path:", error);
+                }
 
                 let itemTotal = parseFloat(item.price) * item.quantity; // Calculate total price per item
                 totalPay += itemTotal; // Add item price to total amount
@@ -139,7 +149,7 @@
                     <div class="flex p-1" id="product-${item.id}">
                         <div id="item" class="flex w-[140px] lg:w-[600px]">
                             <div id="productImage" class="h-[30px] lg:w-[150px] lg:h-[150px] w-[30px] mr-2">
-                                <img src="${item.image}" alt="Product Image" onerror="this.src='/default-image.jpg'">
+                                <img src="${imagePath}" onerror="this.src='/default-image.jpg'">
                             </div>
                             <div class="flex flex-col lg:h-30 lg:pl-20 justify-center">
                                 <p id="productName" class="text-[8px] lg:text-[20px] main-color">${item.name}</p>
