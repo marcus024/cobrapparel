@@ -55,7 +55,7 @@
                     <div class="relative w-full max-w-2xl overflow-hidden">
                         <div id="slider-{{ $product->id }}" class="flex w-full h-full transition-transform duration-500 ease-in-out">
                             @foreach(json_decode($product->images, true) ?? [] as $image)
-                                <img src="{{ asset('storage/' . $image) }}" 
+                                <img src="{{ asset('/' . $image) }}" 
                                     class="w-full h-full object-cover">
                             @endforeach
                         </div>
