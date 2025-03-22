@@ -132,15 +132,9 @@
             cartItems.forEach(item => {
                 let imagePath = "/default-image.jpg"; // Default fallback
                 
-                // Ensure image is correctly parsed from JSON
-                try {
-                    let imageArray = JSON.parse(item.image.replace(/&quot;/g, '"')); // Convert encoded quotes
-                    if (Array.isArray(imageArray) && imageArray.length > 0) {
-                        imagePath = `/${imageArray[0]}`; // Get the first image
+                 if (item.image) {
+                        imagePath = `/storage/${item.image}`;
                     }
-                } catch (error) {
-                    console.error("Error parsing image path:", error);
-                }
 
                 let itemTotal = parseFloat(item.price) * item.quantity; // Calculate total price per item
                 totalPay += itemTotal; // Add item price to total amount
