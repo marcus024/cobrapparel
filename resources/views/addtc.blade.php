@@ -73,25 +73,25 @@
                 </div>
             </div>
         </div>
-        <div  class="lg:w-[50%] w-full lg:h-[100vh] h-[70vh]  bg-[url('/images/bgblur.png')] bg-cover bg-center bg-no-repeat">
+        <div  class="lg:w-[50%] w-full lg:h-[100vh] h-[70vh]   bg-cover bg-center bg-no-repeat">
             <div class="flex my-4 justify-center items-center">
             <img   src="/storage/{{ $product->shop->image }}"
      class="h-[50px] lg:h-[100px] w-[50px] lg:w-[100px] rounded-full m-5" alt="Shop Logo">
 
-<p class="text-center justify-center items-center font-bold text-xl lg:text-4xl main-color">
+<p class="text-center justify-center items-center font-bold text-xl lg:text-4xl text-[#002D62]">
     {{ strtoupper($product->shop->name) }}
 </p>
             </div>
             <div class="flex flex-col my-4 justify-start ">
-                <p class="main-color text-sm lg:text-xl font-medium ml-5">{{ strtoupper($product->name) }}</p>
-                <p class="main-color text-xs ml-5 lg:text-lg">*This is a pre-order</p>
+                <p class="text-[#002D62] text-sm lg:text-xl font-medium ml-5">{{ strtoupper($product->name) }}</p>
+                <p class="text-[#002D62] text-xs ml-5 lg:text-lg">*This is a pre-order</p>
             </div>
             <div class="flex flex-col my-2 justify-start">
-                <p class="main-color text-xs lg:text-lg font-bold ml-5">$ {{ number_format($product->price, 2) }} + GST</p>
+                <p class="text-[#002D62] text-xs lg:text-lg font-bold ml-5">$ {{ number_format($product->price, 2) }} + GST</p>
             </div>
             @if (!empty($product->size_chart))
                 <button onclick="toggleSizeChart('{{ $product->size_chart }}')" 
-                    class="ml-5 bg-btn align-self-start text-white font-bold py-1 px-2 text-xs lg:text-lg w-25 lg:w-35">
+                    class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-25 lg:w-35">
                     SIZE CHART
                 </button>
 
@@ -111,9 +111,9 @@
             <div class="flex flex-col  px-4 my-4">
                 @if (!empty($product->size_chart))
                     <div class="mb-3">
-                        <select id="size" name="size" class="mt-1 lg:w-35 p-2 w-26 lg:h-12 h-10 border border-[#700101] border-2 main-color uppercase">
+                        <select id="size" name="size" class="mt-1 lg:w-35 p-2 w-26 lg:h-12 h-10 border border-[#002d62] border-2 text-[#002D62] uppercase">
                             @if ($product->size_chart === 'dipsas_hoodie')
-                                <optgroup label="KIDS (HOODIE)" class="main-color">
+                                <optgroup label="KIDS (HOODIE)" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
@@ -122,7 +122,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (HOODIE)" class="main-color">
+                                <optgroup label="ADULTS (HOODIE)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -136,7 +136,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_netball_dress')
-                                <optgroup label="ADULTS (NETBALL DRESS)" class="main-color">
+                                <optgroup label="ADULTS (NETBALL DRESS)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -149,7 +149,7 @@
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
-                                <optgroup label="KIDS (NETBALL DRESS)" class="main-color">
+                                <optgroup label="KIDS (NETBALL DRESS)" class="text-[#002D62]">
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -158,7 +158,7 @@
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_quarter_zip')
-                                <optgroup label="KIDS (QUARTER ZIP)" class="main-color">
+                                <optgroup label="KIDS (QUARTER ZIP)" class="text-[#002D62]">
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -166,7 +166,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (QUARTER ZIP)" class="main-color">
+                                <optgroup label="ADULTS (QUARTER ZIP)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -180,7 +180,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_singlet')
-                                <optgroup label="KIDS (SINGLET)" class="main-color">
+                                <optgroup label="KIDS (SINGLET)" class="text-[#002D62]">
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -188,7 +188,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (SINGLET)" class="main-color">
+                                <optgroup label="ADULTS (SINGLET)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -202,7 +202,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_standard_polo')
-                                <optgroup label="KIDS (STANDARD POLO)" class="main-color">
+                                <optgroup label="KIDS (STANDARD POLO)" class="text-[#002D62]">
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -210,7 +210,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (STANDARD POLO)" class="main-color">
+                                <optgroup label="ADULTS (STANDARD POLO)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -224,7 +224,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_trade_polo')
-                                <optgroup label="ADULTS (TRADE POLO)" class="main-color">
+                                <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -238,19 +238,19 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'beanies')
-                                <optgroup label="BEANIES" class="main-color">
+                                <optgroup label="BEANIES" class="text-[#002D62]">
                                     <option value="TODDLER">TODDLER (2-6)</option>
                                     <option value="YOUTH">YOUTH</option>
                                     <option value="ADULT">ADULT</option>
                                     <option value="XL">XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'truckers')
-                                <optgroup label="TRUCKERS" class="main-color">
+                                <optgroup label="TRUCKERS" class="text-[#002D62]">
                                     <option value="LARGE">LARGE</option>
                                     <option value="KIDS">KIDS</option>
                                 </optgroup>
                              @elseif ($product->size_chart === 'dipsas_warmup_tee')
-                                <optgroup label="KIDS (STANDARD LENGTH)" class="main-color">
+                                <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -258,7 +258,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (STANDARD LENGTH)" class="main-color">
+                                <optgroup label="ADULTS (STANDARD LENGTH)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -272,7 +272,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                              @elseif ($product->size_chart === 'transition_hoodie')
-                                <optgroup label="TRANSITION HOODIE KIDS" class="main-color">
+                                <optgroup label="TRANSITION HOODIE KIDS" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
@@ -281,7 +281,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="TRANSITION HOODIE ADULTS" class="main-color">
+                                <optgroup label="TRANSITION HOODIE ADULTS" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -295,7 +295,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                            @elseif ($product->size_chart === 'transition_netball_dress')
-                                <optgroup label="TRANSITION NETBALL DRESS KIDS" class="main-color">
+                                <optgroup label="TRANSITION NETBALL DRESS KIDS" class="text-[#002D62]">
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -303,7 +303,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="TRANSITION NETBALL DRESS ADULTS" class="main-color">
+                                <optgroup label="TRANSITION NETBALL DRESS ADULTS" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -317,7 +317,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'transition_singlet')
-                                <optgroup label="TRANSITION SINGLET KIDS" class="main-color">
+                                <optgroup label="TRANSITION SINGLET KIDS" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
@@ -326,7 +326,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="TRANSITION SINGLET ADULTS" class="main-color">
+                                <optgroup label="TRANSITION SINGLET ADULTS" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -340,7 +340,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'transition_standard_polo')
-                                <optgroup label="TRANSITION HOODIE KIDS" class="main-color">
+                                <optgroup label="TRANSITION HOODIE KIDS" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
@@ -349,7 +349,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="TRANSITION HOODIE ADULTS" class="main-color">
+                                <optgroup label="TRANSITION HOODIE ADULTS" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -363,7 +363,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif  ($product->size_chart === 'transition_trade_polo')
-                                <optgroup label="ADULTS (TRADE POLO)" class="main-color">
+                                <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -377,7 +377,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'transition_warmup_tee')
-                                <optgroup label="KIDS (STANDARD LENGTH)" class="main-color">
+                                <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
@@ -386,7 +386,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (STANDARD LENGTH)" class="main-color">
+                                <optgroup label="ADULTS (STANDARD LENGTH)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -406,23 +406,23 @@
 
                 @if(!empty($product->custom_name))
                     <input type="text" placeholder="CUSTOM NAME" id="custom_name"
-                        class="text-xs lg:text-xl main-color my-1 w-50 lg:w-70 border border-2 border-[#700101] 
-                        h-8 lg:h-10 p-2 font-bold focus:border-[#700101] outline-none"
+                        class="text-xs lg:text-xl text-[#002D62] my-1 w-50 lg:w-70 border border-2 border-[#002d62] 
+                        h-8 lg:h-10 p-2 font-bold focus:border-[#002d62] outline-none"
                         >
                 @endif
 
                 @if(!empty($product->custom_number))
                     <input type="text" placeholder="CUSTOM NUMBER" id="custom_number"
-                        class="text-xs lg:text-xl main-color my-1 w-50 lg:w-70 border border-2 border-[#700101] 
-                        h-8 lg:h-10 p-2 font-bold focus:border-[#700101] outline-none"
+                        class="text-xs lg:text-xl text-[#002D62] my-1 w-50 lg:w-70 border border-2 border-[#002d62] 
+                        h-8 lg:h-10 p-2 font-bold focus:border-[#002d62] outline-none"
                      >
                 @endif
                 <!-- Order Count -->
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center w-20 lg:w-30 border border-[#700101] bg-white border-2 ">
-                        <button onclick="decreaseCount()" class="px-2  main-color text-xs lg:text-lg">-</button>
-                        <span id="orderCount" class="px-2 text-lg main-color font-bold text-xs lg:text-lg">1</span>
-                        <button onclick="increaseCount()" class="px-2  main-color text-xs lg:text-lg ">+</button>
+                    <div class="flex items-center w-20 lg:w-30 border border-[#002d62] bg-white border-2 ">
+                        <button onclick="decreaseCount()" class="px-2  text-[#002D62] text-xs lg:text-lg">-</button>
+                        <span id="orderCount" class="px-2 text-lg text-[#002D62] font-bold text-xs lg:text-lg">1</span>
+                        <button onclick="increaseCount()" class="px-2  text-[#002D62] text-xs lg:text-lg ">+</button>
                     </div>
                 </div>
             </div>
@@ -435,7 +435,7 @@
 
                 <div class="flex flex-col mt-1">
                     <button onclick="addToCart()"
-                        class="ml-5 bg-btn align-self-start text-white font-bold py-1 px-2 text-xs lg:text-lg w-50 lg:w-70">
+                        class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-50 lg:w-70">
                         ADD TO CART
                     </button>
                 </div>
