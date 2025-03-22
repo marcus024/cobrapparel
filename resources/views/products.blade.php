@@ -53,7 +53,7 @@
                 $coverImage = $images[0] ?? 'default.jpg'; // Use first image or fallback
             @endphp
             <a href="{{ url('addtc', ['id' => $product->id]) }}" class="flex flex-col items-center text-center cursor-pointer">
-                <img src="/storage/{{ $coverImage }}" class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain transition-transform transform hover:scale-110" alt="{{ $product->name }}">
+                <img src="/{{ $coverImage }}" class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain transition-transform transform hover:scale-110" alt="{{ $product->name }}">
                 <p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold main-color mt-2">{{ $product->name }}</p>
             </a>
         @endforeach
