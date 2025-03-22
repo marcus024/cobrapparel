@@ -31,12 +31,7 @@ class ProductController extends Controller
             // Store in storage/app/public/products
             $imagePath = $image->store('products', 'public');
 
-            // Copy the file to public/storage/products
-            $sourcePath = storage_path("app/public/{$imagePath}");
-            $destinationPath = public_path("storage/{$imagePath}");
-            copy($sourcePath, $destinationPath);
-
-            // Store the public path for easy access
+            // Store the correct path for front-end display
             $imagePaths[] = "storage/{$imagePath}";
         }
     }
