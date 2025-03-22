@@ -36,10 +36,17 @@ Route::get('/product', function () {
 // Route::get('/addtc', function () {
 //     return view('addtc');
 // });
+// Route::get('/addtc/{id}', function ($id) {
+//     $product = Product::findOrFail($id);
+//     return view('addtc', compact('product'));
+// });
+
 Route::get('/addtc/{id}', function ($id) {
-    $product = Product::findOrFail($id);
+    // Fetch product along with its associated shop
+    $product = Product::with('shop')->findOrFail($id);
     return view('addtc', compact('product'));
 });
+
 
 Route::get('/cart', function () {
     return view('cart');

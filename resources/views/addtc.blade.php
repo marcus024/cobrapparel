@@ -75,8 +75,12 @@
         </div>
         <div  class="lg:w-[50%] w-full lg:h-[100vh] h-[70vh]  bg-[url('/images/bgblur.png')] bg-cover bg-center bg-no-repeat">
             <div class="flex my-4 justify-center items-center">
-                <img src="/images/ducks.png" class="h-[50px] lg:h-[100px] w-[50px] lg:w-[100px] round m-5" alt="">
-                <p class=" text-center justify-center items-center font-bold text-xl lg:text-4xl main-color ">The Hockey Ducks</p>
+            <img   src="/storage/{{ $product->shop->image }}"
+     class="h-[50px] lg:h-[100px] w-[50px] lg:w-[100px] rounded-full m-5" alt="Shop Logo">
+
+<p class="text-center justify-center items-center font-bold text-xl lg:text-4xl main-color">
+    {{ strtoupper($product->shop->name) }}
+</p>
             </div>
             <div class="flex flex-col my-4 justify-start ">
                 <p class="main-color text-sm lg:text-xl font-medium ml-5">{{ strtoupper($product->name) }}</p>
