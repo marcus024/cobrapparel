@@ -130,26 +130,7 @@
             let totalPay = 0; // Initialize total amount
 
             cartItems.forEach(item => {
-                let imagePath = "/default-image.jpg"; // Default fallback
-
-try {
-    if (item.image) {
-        let imageData = item.image.replace(/&quot;/g, '"'); // Decode encoded quotes
-
-        // Check if the image is stored as an array (JSON format)
-        if (imageData.startsWith("[") && imageData.endsWith("]")) {
-            let imageArray = JSON.parse(imageData);
-            if (Array.isArray(imageArray) && imageArray.length > 0) {
-                imagePath = `/${imageArray[0]}`; // Use the first image
-            }
-        } else {
-            // If it's just a string, use it directly
-            imagePath = `/${item.image}`;
-        }
-    }
-} catch (error) {
-    console.error("Error parsing image path:", error);
-}
+                
 
                 let itemTotal = parseFloat(item.price) * item.quantity; // Calculate total price per item
                 totalPay += itemTotal; // Add item price to total amount
