@@ -55,7 +55,7 @@
                     <div class="relative w-full max-w-2xl overflow-hidden">
                         <div id="slider-<?php echo e($product->id); ?>" class="flex w-full h-full transition-transform duration-500 ease-in-out">
                             <?php $__currentLoopData = json_decode($product->images, true) ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <img src="<?php echo e(asset('storage/' . $image)); ?>" 
+                                <img src="<?php echo e(asset('/' . $image)); ?>" 
                                     class="w-full h-full object-cover">
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
@@ -232,6 +232,18 @@
                                     <option value="ADULTS 5XL">ADULTS 5XL</option>
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'beanies'): ?>
+                                <optgroup label="BEANIES" class="main-color">
+                                    <option value="TODDLER">TODDLER (2-6)</option>
+                                    <option value="YOUTH">YOUTH</option>
+                                    <option value="ADULT">ADULT</option>
+                                    <option value="XL">XL</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'truckers'): ?>
+                                <optgroup label="TRUCKERS" class="main-color">
+                                    <option value="LARGE">LARGE</option>
+                                    <option value="KIDS">KIDS</option>
                                 </optgroup>
                              <?php elseif($product->size_chart === 'dipsas_warmup_tee'): ?>
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="main-color">
@@ -502,18 +514,23 @@
     <script>
         function addToCart() {
             let count = parseInt(document.getElementById("orderCount").innerText) || 1;
-
+            let sizeSelect = document.getElementById("size");
             let product = {
                 id: "<?php echo e($product->id); ?>", 
                 name: "<?php echo e($product->name); ?>",
                 price: "<?php echo e($product->price); ?>",
-                image: "/storage/<?php echo e($imagePath); ?>",
+                image: "<?php echo e($imagePath); ?>",
                 quantity: count,
-                size: null,
+                 size: sizeSelect ? sizeSelect.value : null,
                 color: null,
                 custom_name: null,
                 custom_number: null,
             };
+
+            sizeSelect.addEventListener("change", function () {
+                product.size = this.value; // Update product size
+                console.log("Selected Size:", product.size); // Debugging log
+            });
 
             // Check if product name contains "polo" and get the selected size
             if (product.name.toLowerCase().includes("polo")) {

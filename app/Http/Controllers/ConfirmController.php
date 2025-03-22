@@ -83,6 +83,8 @@ class ConfirmController extends Controller
                 'quantity' => $product['quantity'],
                 'price' => $product['price'],
                 'size' => $product['size'] ?? null,
+                'custom_name' => $product['custom_name'] ?? null,
+                'custom_number' => $product['custom_number'] ?? null,
             ]);
         }
 
@@ -90,8 +92,8 @@ class ConfirmController extends Controller
         Mail::to($validatedData['email'])->send(new OrderConfirmationMail($order, $orderItems));
 
         // Send Email Notification to Shop Owner
-        // $shopOwnerEmail = "suppliers@cobrapparel.com"; 
-        $shopOwnerEmail = "markantonyvc01@gmail.com"; 
+        $shopOwnerEmail = "suppliers@cobrapparel.com"; 
+        // $shopOwnerEmail = "markantonyvc01@gmail.com"; 
         Mail::to($shopOwnerEmail)->send(new ShopOwnerNotificationMail($order, $orderItems));
 
         // Redirect to Thank You Page

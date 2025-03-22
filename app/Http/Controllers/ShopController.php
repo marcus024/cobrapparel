@@ -56,6 +56,10 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
         $shop->name = $request->name;
         $shop->owner = $request->owner;
+        $shop->contact_name = $request->contact_name;
+        $shop->contact_number = $request->contact_number;
+        $shop->emailAddress = $request->emailAddress;
+        $shop->duration = $request->duration;
 
         if ($request->hasFile('image')) {
             Storage::delete('public/' . $shop->image);

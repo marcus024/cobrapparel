@@ -153,7 +153,17 @@
                             </div>
                             <div class="flex flex-col lg:h-30 lg:pl-20 justify-center">
                                 <p id="productName" class="text-[8px] lg:text-[20px] main-color">${item.name}</p>
-                                <p id="productSize" class="text-[7px] lg:text-[15px] main-color">${item.size ?? "N/A"}</p>
+                                <p class="text-[7px] lg:text-[15px] main-color">
+                                    <span class="font-bold">Size:</span> ${item.size ?? "N/A"}
+                                </p>
+
+                                <p class="text-[7px] lg:text-[15px] main-color">
+                                    <span class="font-bold">Custom Number:</span> ${item.custom_number ?? "N/A"}
+                                </p>
+
+                                <p class="text-[7px] lg:text-[15px] main-color">
+                                    <span class="font-bold">Custom Name:</span> ${item.custom_name ?? "N/A"}
+                                </p>
                                 <p id="productPrice" class="text-[8px] lg:text-[15px] font-bold main-color">$${parseFloat(item.price).toFixed(2)} + GST</p>
                             </div>
                         </div>
@@ -174,7 +184,8 @@
 
             // Update the total payment
             document.getElementById("content").innerHTML = cartHTML;
-            document.getElementById("totalPay").innerHTML = `TOTAL <span>$${totalPay.toFixed(2)} + GST</span>`;
+           document.getElementById("totalPay").innerHTML = 
+        `TOTAL <span>$${totalPay.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} + GST</span>`;
         })
         .catch(error => console.error('Error fetching cart items:', error));
 }

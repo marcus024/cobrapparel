@@ -14,18 +14,18 @@
 </head>
 <body class="bg-white flex flex-col items-center min-h-screen">
     <!-- Top Widget -->
-    <div class="relative w-full h-100 flex flex-col items-center justify-center text-white bg-black bg-opacity-80 animate-fadeInUp before:content-[''] before:absolute before:inset-0 before:bg-[url('/images/bgblur.png')] before:bg-cover before:bg-center ">
+    <div class="relative w-full h-100 flex flex-col items-center justify-center text-white bg-black bg-opacity-80 animate-fadeInUp before:content-[''] before:absolute before:inset-0 before:bg-[url('/images/bgnavy.jpg')] before:bg-cover before:bg-center ">
         <div class="flex lg:flex-row flex-col  mb-2 px-5 items-center gap-4 relative z-10">
-            <img src="/storage/<?php echo e($shop->image); ?>" alt="<?php echo e($shop->name); ?>" class="w-[100px] h-[100px] lg:h-[200px] lg:w-[200px] mt-5 object-cover rounded-full shadow-lg">
-            <h1 class="text-[30px] text-center lg:text-[90px] font-bold uppercase text-[#700101]"><?php echo e($shop->name); ?></h1>
+            <img src="/storage/<?php echo e($shop->image); ?>" alt="<?php echo e($shop->name); ?>" class="w-[100px] h-[100px] lg:h-[200px] lg:w-[200px] mt-5 object-cover  ">
+            <h1 class="text-[30px] text-center lg:text-[90px] font-bold uppercase text-white"><?php echo e($shop->name); ?></h1>
         </div> 
         <div class="w-11/12 max-w-4xl   p-3 lg:p-6 z-10 rounded-lg  text-center ">
-        <p class=" text-sm lg:text-lg font-semibold main-color">All items in this store are available for pre-order. Once your order is ready, your club contact will notify you with collection details.</p>
+        <p class=" text-sm lg:text-lg font-semibold text-white">All items in this store are available for pre-order. Once your order is ready, your club contact will notify you with collection details.</p>
         <div class="mt-4">
-            <p class="font-bold main-color">Contact</p>
-            <p class="lg:text-sm main-color">
+            <p class="font-bold text-white">Contact</p>
+            <p class="lg:text-sm text-white">
                 <?php echo e($shop->contact_name); ?> | <?php echo e($shop->contact_number); ?> | 
-                <a href="mailto:<?php echo e($shop->emailAddress); ?>" class="text-[#700101] underline">
+                <a href="mailto:<?php echo e($shop->emailAddress); ?>" class="text-white underline">
                     <?php echo e($shop->emailAddress); ?>
 
                 </a>
@@ -37,10 +37,7 @@
                 $closingDate = \Carbon\Carbon::parse($shop->created_at)->addMonths((int) $shop->duration)->format('F d, Y');
             ?>
 
-            <p class="text-sm text-gray-600">
-                🛑 Note: This shop will close on <strong><?php echo e($closingDate); ?></strong>. 
-                After this date, checkout will no longer be available.
-            </p>
+            
         </div>
     </div>
     </div>
@@ -55,7 +52,7 @@
             ?>
             <a href="<?php echo e(url('addtc', ['id' => $product->id])); ?>" class="flex flex-col items-center text-center cursor-pointer">
                 <img src="/<?php echo e($coverImage); ?>" class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain transition-transform transform hover:scale-110" alt="<?php echo e($product->name); ?>">
-                <p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold main-color mt-2"><?php echo e($product->name); ?></p>
+                <p class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold text-[#00308F] mt-2"><?php echo e($product->name); ?></p>
             </a>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
@@ -63,7 +60,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -71,7 +68,7 @@
             }
         }
         .animate-fadeInUp {
-            animation: fadeInUp 0.8s ease-out forwards;
+            animation: fadeInUp 0.4s ease-out forwards;
         }
     </style>
 </body>

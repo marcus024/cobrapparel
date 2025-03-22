@@ -15,7 +15,6 @@
     </div>
     <div class="overflow-x-auto m-3">
 
-
     @if ($orders->isEmpty())
         <p class="text-red-500">No orders found.</p>
     @else
@@ -23,6 +22,7 @@
             <thead>
                 <tr class="bg-gray-200">
                     <th class="border border-gray-300 p-2">Order ID</th>
+                    <th class="border border-gray-300 p-2">Date</th>
                     <th class="border border-gray-300 p-2">Club Name</th>
                     <th class="border border-gray-300 p-2">Customer</th>
                     <th class="border border-gray-300 p-2">Email</th>
@@ -32,11 +32,12 @@
                     <th class="border border-gray-300 p-2">State</th>
                     <th class="border border-gray-300 p-2">Postcode</th>
                     <th class="border border-gray-300 p-2">Status</th>
-                    <th class="border border-gray-300 p-2">Date</th>
                     <th class="border border-gray-300 p-2">Product Name</th>
                     <th class="border border-gray-300 p-2">Quantity</th>
                     <th class="border border-gray-300 p-2">Price</th>
                     <th class="border border-gray-300 p-2">Size</th>
+                    <th class="border border-gray-300 p-2">Custom Name</th>
+                    <th class="border border-gray-300 p-2">Custom Number</th>
                     <th class="border border-gray-300 p-2">Actions</th>
                 </tr>
             </thead>
@@ -54,6 +55,7 @@
 
                         <tr>
                             <td class="border border-gray-300 p-2">{{ $order->order_id }}</td>
+                            <td class="border border-gray-300 p-2">{{ $order->created_at->format('Y-m-d') }}</td>
                             <td class="border border-gray-300 p-2">{{ $shopName }}</td>
                             <td class="border border-gray-300 p-2">{{ $order->first_name }} {{ $order->last_name }}</td>
                             <td class="border border-gray-300 p-2">{{ $order->email }}</td>
@@ -63,12 +65,14 @@
                             <td class="border border-gray-300 p-2">{{ $order->state }}</td>
                             <td class="border border-gray-300 p-2">{{ $order->postcode }}</td>
                             <td class="border border-gray-300 p-2">{{ $order->status }}</td>
-                            <td class="border border-gray-300 p-2">{{ $order->created_at->format('Y-m-d') }}</td>
+                            
                              <!-- Shop Name Column -->
                             <td class="border border-gray-300 p-2">{{ $item->product_name }}</td>
                             <td class="border border-gray-300 p-2">{{ $item->quantity }}</td>
                             <td class="border border-gray-300 p-2">${{ $item->price }}</td>
                             <td class="border border-gray-300 p-2">{{ $item->size ?? 'N/A' }}</td>
+                            <td class="border border-gray-300 p-2">{{ $item->custom_name ?? 'N/A' }}</td>
+                            <td class="border border-gray-300 p-2">{{ $item->custom_number ?? 'N/A' }}</td>
                             <td class="border border-gray-300 p-2">
                                 <button onclick="openModal('{{ $order->order_id }}')" class="bg-blue-500 text-white px-2 py-1 rounded">View</button>
                             </td>

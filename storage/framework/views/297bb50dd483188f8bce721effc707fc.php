@@ -71,6 +71,9 @@ function fetchShops() {
     fetch("/shops")
         .then(response => response.json())
         .then(shops => {
+
+            console.log("Fetched Shop Details:", shops); 
+
             let tableBody = document.getElementById("shopTableBody");
             tableBody.innerHTML = ""; // Clear existing content
 
@@ -86,9 +89,17 @@ function fetchShops() {
                     <td class="border border-gray-300 p-3">${shop.owner}</td>
                     <td class="border border-gray-300 p-3">${new Date(shop.created_at).toLocaleDateString()}</td>
                     <td class="border border-gray-300 p-3 flex space-x-2">
-                        <button onclick="editShop(${shop.id}, '${shop.name}', '${shop.owner}', '/storage/${shop.image}')" 
-                            class="bg-blue-500 text-white px-2 py-1 rounded flex items-center space-x-1">
-                            <img src="/images/edit_shop.png" alt="Delete" class="h-5 w-5"> 
+                        <button onclick="editShop(
+                            ${shop.id}, 
+                            '${shop.name}', 
+                            '${shop.owner}', 
+                            '${shop.contact_name}', 
+                            '${shop.contact_number}', 
+                            '${shop.duration}', 
+                            '${shop.emailAddress}', 
+                            '/storage/${shop.image}'
+                        )" class="bg-blue-500 text-white px-2 py-1 rounded flex items-center space-x-1">
+                            <img src="/images/edit_shop.png" alt="Edit" class="h-5 w-5"> 
                             <span>Edit</span>
                         </button>
                         <button onclick="deleteShop(${shop.id})" 
@@ -161,42 +172,77 @@ function previewImage(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
+window.editShop = function (id, name, owner, contactName, contactNumber, duration, email, image) {
+    console.log("Editing Shop:", {
+        id,
+        name,
+        owner,
+        contactName,
+        contactNumber,
+        duration,
+        email,
+        image
+    });
 
-function editShop(id, name, owner, imageUrl) {
-    document.getElementById("editShopId").value = id;
-    document.getElementById("editShopName").value = name;
-    document.getElementById("editShopOwner").value = owner;
-    document.getElementById("editShopImagePreview").src = imageUrl;
-    document.getElementById("editShopModal").classList.remove("hidden");
-}
+    // Populate input fields with existing values
+    document.getElementById('editShopName').value = name;
+    document.getElementById('editShopOwner').value = owner;
+    document.getElementById('editContactName').value = contactName;
+    document.getElementById('editContactNumber').value = contactNumber;
+    document.getElementById('editShopDuration').value = duration;
+    document.getElementById('editEmailAddress').value = email;
 
-function updateShop() {
-    let shopId = document.getElementById("editShopId").value;
-    let shopName = document.getElementById("editShopName").value;
-    let shopOwner = document.getElementById("editShopOwner").value;
-    let shopImage = document.getElementById("editShopImage").files[0];
-    
+    // Populate and show the existing image preview
+    const previewContainer = document.getElementById('editPreviewContainer');
+    const previewImage = document.getElementById('editPreviewImage');
+    if (image) {
+        previewImage.src = image;
+        previewContainer.classList.remove('hidden');
+    } else {
+        previewContainer.classList.add('hidden');
+    }
 
-    let formData = new FormData();
-    formData.append("name", shopName);
-    formData.append("owner", shopOwner);
-    if (shopImage) formData.append("image", shopImage);
+    // Show the modal
+    document.getElementById('editShopModal').classList.remove('hidden');
 
-    fetch(`/shops/${shopId}/update`, {
-        method: "POST",
+    // Store the shop ID for updating
+    document.getElementById('editShopModal').setAttribute("data-shop-id", id);
+};
+
+
+window.updateShop = function () {
+    const shopId = document.getElementById('editShopModal').getAttribute("data-shop-id");
+
+    const updatedShop = {
+        id: shopId,
+        name: document.getElementById('editShopName').value,
+        owner: document.getElementById('editShopOwner').value,
+        contact_name: document.getElementById('editContactName').value,
+        contact_number: document.getElementById('editContactNumber').value,
+        duration: document.getElementById('editShopDuration').value,
+        emailAddress: document.getElementById('editEmailAddress').value,
+        image: document.getElementById('editPreviewImage').src, // Keeping the same image for now
+    };
+
+    console.log("Updating Shop:", updatedShop);
+
+    fetch(`/shops/${shopId}`, {
+        method: "PUT",
         headers: {
-            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            "Content-Type": "application/json"
         },
-        body: formData
+        body: JSON.stringify(updatedShop)
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
-        fetchShops();
-        document.getElementById("editShopModal").classList.add("hidden");
+        console.log("Shop updated successfully:", data);
+        document.getElementById('editShopModal').classList.add('hidden');
+        fetchShops(); // Refresh shop list
     })
     .catch(error => console.error("Error updating shop:", error));
-}
+};
+
+
 
 function deleteShop(id) {
     if (!confirm("Are you sure you want to delete this shop?")) return;

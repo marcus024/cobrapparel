@@ -13,7 +13,7 @@
                     <th class="border border-gray-300 p-2">Product Image</th>
                     <th class="border border-gray-300 p-2">Product Name</th>
                     <th class="border border-gray-300 p-2">Price</th>
-                    <th class="border border-gray-300 p-2">Stock</th>
+                    <th class="border border-gray-300 p-2">Size Chart</th>
                     <th class="border border-gray-300 p-2">Shop</th>
                     <th class="border border-gray-300 p-2">Actions</th>
                 </tr>
@@ -79,6 +79,8 @@
                 <option value="dipsas_hoodie">Dipsas Hoodie</option>
                 <option value="dipsas_netball_dress">Dipsas Netball Dress</option>
                 <option value="dipsas_quarter_zip">Dipsas Quarter Zip</option>
+                <option value="truckers">Truckers</option>
+                <option value="beanies">Beanies</option>
             </select>
         </div>
 

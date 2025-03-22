@@ -56,14 +56,24 @@ public function store(Request $request)
 
         // Prepare line items for Stripe Checkout
         $lineItems = [];
+        $totalAmount = 0; // Initialize total in cents
+
         foreach ($validatedData['cart'] as $product) {
+            $unitAmount = $product['price'] * 1.10 * 100; // Include GST (10%) and convert to cents
+            $totalAmount += $unitAmount * $product['quantity']; // Compute total
+
+            $productDescription = "Size: " . ($product['size'] ?? 'N/A') . 
+                      ", Custom Name: " . ($product['custom_name'] ?? 'N/A') . 
+                      ", Custom Number: " . ($product['custom_number'] ?? 'N/A');
+
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => 'usd',
+                    'currency' => 'aud',
                     'product_data' => [
                         'name' => $product['name'],
+                        'description' => $productDescription,
                     ],
-                    'unit_amount' => $product['price'] * 100, // Convert to cents
+                    'unit_amount' => round($unitAmount), // Round to avoid Stripe errors
                 ],
                 'quantity' => $product['quantity'],
             ];
@@ -106,11 +116,12 @@ public function store(Request $request)
         ]);
     }
 
-    public function index()
+   public function index()
     {
-        $orders = Order::all(); // Fetch orders from database
+        $orders = Order::orderBy('created_at', 'desc')->get(); // Order by oldest first
         return view('admin.orders', compact('orders'));
     }
+
 
     public function updateStatus(Request $request, $id)
     {
