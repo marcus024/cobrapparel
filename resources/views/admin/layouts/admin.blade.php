@@ -370,7 +370,7 @@ function addProduct() {
 
             products.forEach(product => {
                 let images = JSON.parse(product.images || "[]"); // Ensure images are parsed as an array
-                let imageSrc = images.length > 0 ? `/storage/${images[0]}` : "./images/no-image.png"; // Pick first image or default
+             let imageSrc = images.length > 0 ? `/${images[0]}` : "./images/no-image.png"; // Pick first image or default
 
                 let row = `
                     <tr id="productRow-${product.id}">
