@@ -510,7 +510,7 @@
                 id: "{{ $product->id }}", 
                 name: "{{ $product->name }}",
                 price: "{{ $product->price }}",
-                image: "/storage/{{ $imagePath }}",
+                image: "{{ $imagePath }}",
                 quantity: count,
                 size: null,
                 color: null,
