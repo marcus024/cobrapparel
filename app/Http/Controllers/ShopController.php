@@ -25,7 +25,9 @@ class ShopController extends Controller
     ]);
 
     // Store image
-    $imagePath = $request->file('image')->store('shop_images', 'public');
+   $imagePath = 'shop_images/' . time() . '_' . $request->file('image')->getClientOriginalName();
+    $request->file('image')->move(public_path('shop_images'), $imagePath);
+
 
     // Insert into database
     $shop = Shop::create([
