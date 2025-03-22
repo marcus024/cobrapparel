@@ -20,7 +20,7 @@ class CartController extends Controller
         'id' => 'required|integer',
         'name' => 'required|string',
         'price' => 'required|numeric',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'image' => 'required|string', // Expecting a direct string path
         'quantity' => 'required|integer',
         'size' => 'nullable|string',
         'color' => 'nullable|string',
@@ -28,23 +28,12 @@ class CartController extends Controller
         'custom_number' => 'nullable|string|max:255',
     ])->validate();
 
-    if ($request->hasFile('image')) {
-                    // Store in storage/app/public/news_images
-                    $imagePath = $request->file('image')->store('shop_images', 'public');
-
-                    // Copy the file to public/storage/news_images
-                    $sourcePath = storage_path("app/public/{$imagePath}");
-                    $destinationPath = public_path("storage/{$imagePath}");
-                    copy($sourcePath, $destinationPath);
-                }
-
-
     // Store in database
     $cartItem = CartItem::create([
         'product_id' => $validatedData['id'],
         'name' => $validatedData['name'],
         'price' => $validatedData['price'],
-        'image' => $imagePath,
+        'image' => $validatedData['image'], // Directly store the string
         'quantity' => $validatedData['quantity'],
         'size' => $validatedData['size'] ?? null,
         'color' => $validatedData['color'] ?? null,
