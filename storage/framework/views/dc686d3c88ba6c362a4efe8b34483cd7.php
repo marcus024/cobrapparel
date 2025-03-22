@@ -379,19 +379,19 @@ Our store is hosted on an e-commerce platform that provides us with the online t
                             </div>
                         </div>
                         <div class="flex flex-col lg:h-30 lg:pl-20 justify-center">
-                            <p class="text-[8px] lg:text-[20px] main-color">
-                                <span class="font-bold">Name:</span> ${item.name}
+                            <p class="text-[8px] lg:text-[15px] main-color">
+                                 ${item.name}
                             </p>
-                            <p class="text-[7px] lg:text-[15px] main-color">
+                            <p class="text-[7px] lg:text-[12px] main-color">
                                 <span class="font-bold">Size:</span> ${item.size ?? "N/A"}
                             </p>
-                            <p class="text-[7px] lg:text-[15px] main-color">
+                            <p class="text-[7px] lg:text-[12px] main-color">
                                 <span class="font-bold">Custom Number:</span> ${item.custom_number ?? "N/A"}
                             </p>
-                            <p class="text-[7px] lg:text-[15px] main-color">
+                            <p class="text-[7px] lg:text-[12px] main-color">
                                 <span class="font-bold">Custom Name:</span> ${item.custom_name ?? "N/A"}
                             </p>
-                            <p class="text-[8px] lg:text-[15px] font-bold main-color">
+                            <p class="text-[8px] lg:text-[12px] font-bold main-color">
                                 <span class="font-bold">Price:</span> $${parseFloat(item.price).toFixed(2)} + GST
                             </p>
                         </div>

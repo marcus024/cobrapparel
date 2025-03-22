@@ -202,7 +202,7 @@ function removeFromCart(itemId) {
     .then(response => response.json())
     .then(data => {
         console.log(data.message);
-        showNotification("Removed from cart","red");
+        // showNotification("Removed from cart","red");
         loadCartItems(); // Refresh the cart display
     })
     .catch(error => console.error('Error removing item:', error));
