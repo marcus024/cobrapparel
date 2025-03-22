@@ -131,9 +131,6 @@
 
             cartItems.forEach(item => {
                 let imagePath = "/default-image.jpg"; // Default fallback
-                
-                // Ensure image is correctly parsed from JSON
-               let imagePath = "./images/no-image.png"; // Default image
 
 try {
     if (item.image) {
