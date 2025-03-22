@@ -59,7 +59,7 @@ public function store(Request $request)
         foreach ($validatedData['cart'] as $product) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => 'gbp',
+                    'currency' => 'usd',
                     'product_data' => [
                         'name' => $product['name'],
                     ],
