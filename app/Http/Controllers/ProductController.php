@@ -25,10 +25,19 @@ class ProductController extends Controller
         'images.*'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
     ]);
 
-    $imagePaths = [];
+   $imagePaths = [];
     if ($request->hasFile('images')) {
         foreach ($request->file('images') as $image) {
-            $imagePaths[] = $image->store('products', 'public');
+            // Store in storage/app/public/products
+            $imagePath = $image->store('products', 'public');
+
+            // Copy the file to public/storage/products
+            $sourcePath = storage_path("app/public/{$imagePath}");
+            $destinationPath = public_path("storage/{$imagePath}");
+            copy($sourcePath, $destinationPath);
+
+            // Store the public path for easy access
+            $imagePaths[] = "storage/{$imagePath}";
         }
     }
 
