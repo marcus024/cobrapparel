@@ -372,6 +372,10 @@ function addProduct() {
                 let images = JSON.parse(product.images || "[]"); // Ensure images are parsed as an array
              let imageSrc = images.length > 0 ? `/${images[0]}` : "./images/no-image.png"; // Pick first image or default
 
+             function formatSizeChart(value) {
+                return value.replace(/_/g, ' ') // Replace underscores with spaces
+                                    .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first letter of each word
+                    }
                 let row = `
                     <tr id="productRow-${product.id}">
                         <td class="border border-gray-300 p-2 text-center">
@@ -379,7 +383,7 @@ function addProduct() {
                         </td>
                         <td class="border border-gray-300 p-2">${product.name}</td>
                         <td class="border border-gray-300 p-2">$${product.price}</td>
-                        <td class="border border-gray-300 p-2">${product.stock}</td>
+                        <td class="border border-gray-300 p-2">${formatSizeChart(product.size_chart)}</td>
                         <td class="border border-gray-300 p-2">${product.shop.name}</td>
                         <td class="border border-gray-300 p-3 flex space-x-2">
                             <button onclick="editProduct(${product.id}, '${product.name}', '${product.stock}', '${product.price}', '${product.shop.id}')" 

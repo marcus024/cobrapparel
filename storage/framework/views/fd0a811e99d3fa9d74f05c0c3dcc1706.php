@@ -136,7 +136,7 @@
                 try {
                     let imageArray = JSON.parse(item.image.replace(/&quot;/g, '"')); // Convert encoded quotes
                     if (Array.isArray(imageArray) && imageArray.length > 0) {
-                        imagePath = `/storage/${imageArray[0]}`; // Get the first image
+                        imagePath = `/${imageArray[0]}`; // Get the first image
                     }
                 } catch (error) {
                     console.error("Error parsing image path:", error);
