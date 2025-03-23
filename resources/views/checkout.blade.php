@@ -91,7 +91,7 @@
             <p class="text-lg font-semibold">Confirm Checkout</p>
             <p class="text-sm mt-2">Are you sure you want to proceed to checkout?</p>
             <div class="flex justify-center mt-4 space-x-4">
-                <button id="confirmCheckout" class="bg-[#700101] text-white px-4 py-2 rounded">Yes, Checkout</button>
+                <button id="confirmCheckout" class="bg-[#700101] text-white px-4 py-2 rounded">Yes</button>
                 <button id="cancelCheckout" class="bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
             </div>
         </div>

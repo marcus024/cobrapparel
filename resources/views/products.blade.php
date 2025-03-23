@@ -44,7 +44,15 @@
     </div>
     </div>
     <!-- Middle Widget -->
-   
+   <div class=" w-full h-8  justify-end flex">
+        <div class="justify-end items-center m-2">
+            <a href="{{ route('cart') }}" class="block">
+                <img src="/images/cart.png"
+                    class="w-5 h-5 transition-transform transform hover:scale-110 hover:rotate-12 hover:drop-shadow-lg"
+                    alt="Cart">
+            </a>
+        </div>
+    </div>
     <!-- Bottom Widget (Product Listing) -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 px-10 gap-6 my-15 mx-5 lg:w-full animate-fadeInUp">
         @foreach($products as $product)

@@ -22,6 +22,7 @@ class ProductController extends Controller
         'name'      => 'required|string|max:255',
         'price'     => 'required|numeric|min:0',
         'stock'     => 'required|integer|min:0',
+        'productEnd'=> 'nullable|string|max:255',
         'images.*'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
     ]);
 
@@ -55,6 +56,7 @@ class ProductController extends Controller
         'name'      => $request->name,
         'price'     => $request->price,
         'stock'     => $request->stock,
+        'productEnd'=> $request->productEnd,
         'images'    => json_encode($imagePaths), // Store images as JSON
     ];
 

@@ -103,6 +103,10 @@
 
         <!-- Right Side: Image Upload & Preview -->
         <div class="w-full md:w-1/2 flex flex-col">
+
+            <label class="block font-semibold mb-1">Product End Date</label>
+            <input type="date" id="productEnd" class="border p-2 w-full mb-3">
+
             <!-- Image Upload Input -->
             <label class="block font-semibold mb-1">Upload Images</label>
             <input type="file" id="productImages" class="border p-2 w-full mb-3" accept="image/*" multiple onchange="previewImages()">

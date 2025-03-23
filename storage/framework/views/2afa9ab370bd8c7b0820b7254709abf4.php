@@ -155,19 +155,51 @@
             <p style="margin-left:20px;">A customer has placed a new order. Please review the details below.</p>
 
             <!-- Order Summary -->
-            <div class="order-summary">
+           <div class="order-summary">
                 <h3 style="margin-left:20px;">Order Summary</h3>
                 <ul>
+                    <?php
+                        $subtotal = 0;
+                    ?>
+
                     <?php $__currentLoopData = $orderItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li class="order-item">
-                        <div>
-                            <span class="item-name"><?php echo e($item->product_name); ?></span><br>
-                            <span class="item-quantity">Quantity: <?php echo e($item->quantity); ?></span>
-                        </div>
-                        <span class="item-price">$<?php echo e(number_format($item->price, 2)); ?></span>
-                    </li>
+                        <?php
+                            $itemTotal = $item->price * $item->quantity;
+                            $subtotal += $itemTotal;
+                        ?>
+                        <li class="order-item">
+                            <div>
+                                <span class="item-name"><?php echo e($item->product_name); ?></span><br>
+                                <span class="item-quantity">Quantity: <?php echo e($item->quantity); ?></span><br>
+                                <?php if(!empty($item->size)): ?>
+                                    <span class="item-size">Size: <?php echo e($item->size); ?></span><br>
+                                <?php endif; ?>
+                                <?php if(!empty($item->custom_name)): ?>
+                                    <span class="item-custom-name">Custom Name: <?php echo e($item->custom_name); ?></span><br>
+                                <?php endif; ?>
+                                <?php if(!empty($item->custom_number)): ?>
+                                    <span class="item-custom-number">Custom Number: <?php echo e($item->custom_number); ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </li>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
+
+                <!-- Display Reference Code -->
+                
+                <div class="reference-code mt-3" style="margin-left: 20px;">
+                    <p><strong>Reference Code:</strong> <?php echo e($order->reference_code); ?></p>
+                </div>
+
+                <!-- Display Total Amount Including GST -->
+                <?php
+                    $gst = $subtotal * 0.10;
+                    $totalWithGST = $subtotal + $gst;
+                ?>
+
+                <div class="total-summary mt-4" style="margin-left: 20px;">
+                    <p><strong>We have received a total (including GST) of $<?php echo e(number_format($totalWithGST, 2)); ?>.</strong></p>
+                </div>
             </div>
 
             <!-- Customer Details -->

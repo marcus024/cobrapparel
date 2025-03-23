@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Mail\ShopOwnerNotificationMail;
 use App\Mail\OrderConfirmationMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 use Stripe\Exception\ApiErrorException;
 
@@ -58,6 +59,8 @@ class ConfirmController extends Controller
         $lastThreeDigits = substr($validatedData['phone'], -3);
         $orderID = $initials . $orderDate . $lastThreeDigits;
 
+        $referenceCode = 'ORD-' . strtoupper(Str::random(4)) . '-' . now()->format('YmdHis');
+
         // Insert Order into Database
         $order = Order::create([
             'order_id' => $orderID,
@@ -69,6 +72,7 @@ class ConfirmController extends Controller
             'city' => $validatedData['city'],
             'state' => $validatedData['state'],
             'postcode' => $validatedData['postcode'],
+            'reference_code' => $referenceCode,
             'status' => 'Paid',
         ]);
 
@@ -78,6 +82,7 @@ class ConfirmController extends Controller
         foreach ($validatedData['cart'] as $product) {
             $orderItems[] = OrderItem::create([
                 'order_id' => uniqid(),
+             
                 'order_unique' => $order->order_id,
                 'product_name' => $product['name'],
                 'quantity' => $product['quantity'],

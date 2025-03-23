@@ -49,7 +49,7 @@
 </head>
 <body>
     <div class="flex flex-col lg:flex-row w-full h-auto">
-        <div class="w-full flex justify-center items-center h-[30vh] lg:h-[100vh] overflow-hidden relative">
+        <div class="w-full flex justify-center items-center h-[60vh] lg:h-[100vh] overflow-hidden relative">
             <div class="flex w-full max-w-3xl h-full">
                 <div class="relative w-full flex justify-center items-center">
                     <div class="relative w-full max-w-2xl overflow-hidden">
@@ -82,9 +82,21 @@
     {{ strtoupper($product->shop->name) }}
 </p>
             </div>
+            <div class=" w-full h-8  justify-end flex">
+                <div class="justify-end items-center m-5">
+                    <a href="{{ route('cart') }}" class="block">
+                        <img src="/images/cart.png"
+                            class="w-5 h-5 transition-transform transform hover:scale-110 hover:rotate-12 hover:drop-shadow-lg"
+                            alt="Cart">
+                    </a>
+                </div>
+            </div>
             <div class="flex flex-col my-4 justify-start ">
                 <p class="text-[#002D62] text-sm lg:text-xl font-medium ml-5">{{ strtoupper($product->name) }}</p>
                 <p class="text-[#002D62] text-xs ml-5 lg:text-lg">*This is a pre-order</p>
+                <p class="italic text-[#002D62] text-xs ml-5 lg:text-xm">
+                    Available until: {{ $product->productEnd ?? 'N/A' }}
+                </p>
             </div>
             <div class="flex flex-col my-2 justify-start">
                 <p class="text-[#002D62] text-xs lg:text-lg font-bold ml-5">$ {{ number_format($product->price, 2) }} + GST</p>
@@ -432,12 +444,15 @@
                     class="fixed top-5 left-1/2 ml-3 transform -translate-x-1/2 bg-green-500 text-white text-xs lg:text-lg py-2 px-4 rounded-lg shadow-lg opacity-0 invisible transition-all duration-500">
                     ✅ Added to Cart Successfully!
                 </div> --}}
-
+                
                 <div class="flex flex-col mt-1">
                     <button onclick="addToCart()"
                         class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-50 lg:w-70">
                         ADD TO CART
                     </button>
+                    <p id="productAlert" class="ml-5 text-red-600 text-xs lg:text-lg mt-2 hidden">
+                        This product is no longer available.
+                    </p>
                 </div>
             </div>
         </div>
@@ -522,6 +537,18 @@
         function addToCart() {
             let count = parseInt(document.getElementById("orderCount").innerText) || 1;
             let sizeSelect = document.getElementById("size");
+            let productEnd = "{{ $product->productEnd }}"; 
+            let currentDate = new Date().toISOString().split("T")[0];
+
+            let alertMessage = document.getElementById("productAlert");
+
+            if (productEnd === currentDate) {
+                alertMessage.classList.remove("hidden"); 
+                return; 
+            } else {
+                alertMessage.classList.add("hidden"); 
+            }
+
             let product = {
                 id: "{{ $product->id }}", 
                 name: "{{ $product->name }}",
@@ -534,10 +561,12 @@
                 custom_number: null,
             };
 
-            sizeSelect.addEventListener("change", function () {
-                product.size = this.value; // Update product size
-                console.log("Selected Size:", product.size); // Debugging log
-            });
+            if (sizeSelect) {
+                sizeSelect.addEventListener("change", function () {
+                    product.size = this.value;
+                    console.log("Selected Size:", product.size);
+                });
+            }
 
             // Check if product name contains "polo" and get the selected size
             if (product.name.toLowerCase().includes("polo")) {

@@ -339,9 +339,10 @@ function addProduct() {
     let productName = document.getElementById("productName").value;
     let productPrice = document.getElementById("productPrice").value;
     let productStock = document.getElementById("productStock").value;
-    let sizeChart = document.getElementById("sizeChartSelect").value; // Get size chart
-    let customNumber = document.getElementById("customNumber").value; // Get custom number
-    let customName = document.getElementById("customName").value; // Get custom name
+    let sizeChart = document.getElementById("sizeChartSelect").value; 
+    let customNumber = document.getElementById("customNumber").value; 
+    let customName = document.getElementById("customName").value;
+    let productEnd = document.getElementById("productEnd").value;
 
     if (!shopId || !productName || !productPrice) {
         alert("Please fill in all required fields.");
@@ -353,7 +354,7 @@ function addProduct() {
     formData.append("name", productName);
     formData.append("price", productPrice);
     formData.append("stock", productStock);
-
+    formData.append("productEnd", productEnd);
     // Include optional fields
     if (sizeChart) {
         formData.append("size_chart", sizeChart);
@@ -421,10 +422,10 @@ function addProduct() {
              let imageSrc = images.length > 0 ? `/${images[0]}` : "./images/no-image.png"; // Pick first image or default
 
              function formatSizeChart(value) {
-    if (!value) return "N/A"; // Return a default value if null or undefined
-    return value.replace(/_/g, ' ') // Replace underscores with spaces
-                .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first letter of each word
-}
+                    if (!value) return "N/A"; // Return a default value if null or undefined
+                    return value.replace(/_/g, ' ') // Replace underscores with spaces
+                                .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first letter of each word
+                }
 
                 let row = `
                     <tr id="productRow-${product.id}">
