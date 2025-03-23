@@ -411,6 +411,8 @@ function addProduct() {
     fetch("/products")
         .then(response => response.json())
         .then(products => {
+
+            console.log("Fetched products:", products);
             let tableBody = document.getElementById("productTableBody");
             tableBody.innerHTML = ""; // Clear existing rows
 
@@ -419,9 +421,11 @@ function addProduct() {
              let imageSrc = images.length > 0 ? `/${images[0]}` : "./images/no-image.png"; // Pick first image or default
 
              function formatSizeChart(value) {
-                return value.replace(/_/g, ' ') // Replace underscores with spaces
-                                    .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first letter of each word
-                    }
+    if (!value) return "N/A"; // Return a default value if null or undefined
+    return value.replace(/_/g, ' ') // Replace underscores with spaces
+                .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first letter of each word
+}
+
                 let row = `
                     <tr id="productRow-${product.id}">
                         <td class="border border-gray-300 p-2 text-center">

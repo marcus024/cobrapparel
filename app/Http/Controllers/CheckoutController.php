@@ -94,7 +94,6 @@ public function store(Request $request)
     }
 }
 
-
     public function show($id)
     {
         // Fetch the order based on order_id
