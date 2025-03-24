@@ -45,7 +45,7 @@ public function store(Request $request)
         'city' => 'required|string',
         'state' => 'required|string',
         'postcode' => 'required|string|max:10',
-        'cart' => 'required|array',
+        'cart' => 'nullable|array',
     ]);
 
     try {
