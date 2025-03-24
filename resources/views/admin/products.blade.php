@@ -136,27 +136,29 @@
 
 <!-- Edit Product Modal -->
 <div id="editProductModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
-    <div class="bg-white p-6 rounded-lg w-1/3">
+    <div class="bg-white p-6 rounded-lg w-1/2">
         <h2 class="text-xl font-bold mb-4">Edit Product</h2>
         
         <form id="editProductForm" enctype="multipart/form-data">
             <input type="hidden" id="editProductId">
             
-            <div class="flex lg:flex-row ">
-                <div class="flex lg:flex-col">
+            <div class="flex lg:flex-row m-2">
+                <div class="flex lg:flex-col m-2">
                     <label class="block text-sm font-semibold">Name</label>
                     <input type="text" id="editProductName" class="w-full border p-2 rounded mb-2">
                     
                     <label class="block text-sm font-semibold">Price</label>
                     <input type="number" id="editProductPrice" class="w-full border p-2 rounded mb-2">
-                    
+                </div>   
+                <div class="flex lg:flex-col m-2">
                     <label class="block text-sm font-semibold">Stock</label>
                     <input type="number" id="editProductStock" class="w-full border p-2 rounded mb-2">
-                </div>
-                <div class="flex lg:flex-col">
+                
+                
                     <label class="block text-sm font-semibold">Product End Date</label>
                     <input type="text" id="editProductEndDate" class="w-full border p-2 rounded mb-2">
-                    
+                </div>
+                <div class="flex lg:flex-col m-2">
                     <label class="block text-sm font-semibold">Custom Name</label>
                     <input type="number" id="editProductCustomname" class="w-full border p-2 rounded mb-2">
                     
@@ -164,7 +166,7 @@
                     <input type="number" id="editProductCustomnumber" class="w-full border p-2 rounded mb-2">
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-3 mt-3">
+            <div class="grid grid-cols-2 gap-3 m-2">
                 <select id="editProductSizechart" class="border p-2 w-full bg-gray-200 " >
                     <option value="" disabled selected>Check the box to enable</option>
                     <option value="transition_singlet">Transition Singlet</option>

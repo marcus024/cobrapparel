@@ -196,6 +196,7 @@
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_singlet')
                                 <optgroup label="KIDS (SINGLET)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -218,6 +219,7 @@
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_standard_polo')
                                 <optgroup label="KIDS (STANDARD POLO)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -271,6 +273,7 @@
                                 </optgroup>
                              @elseif ($product->size_chart === 'dipsas_warmup_tee')
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
