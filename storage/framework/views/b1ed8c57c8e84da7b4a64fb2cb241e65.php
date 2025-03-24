@@ -11,17 +11,19 @@
     <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes slide {
-            0%, 100% { transform: translateX(0%); }
-            33% { transform: translateX(-100%); }
-            66% { transform: translateX(-200%); }
-        }
+       @keyframes slide {
+    0%, 25% { transform: translateX(0%); } /* Stay longer before moving */
+    30%, 55% { transform: translateX(-100%); } /* Move to next slide and stay */
+    60%, 85% { transform: translateX(-200%); } /* Move to next slide and stay */
+    90%, 100% { transform: translateX(0%); } /* Loop back to first */
+}
 
-        .animate-slide {
-            display: flex;
-            width: 300%; /* Adjust to match the number of slides */
-            animation: slide 20s infinite linear;
-        }
+.animate-slide {
+    display: flex;
+    width: 300%; /* Adjust based on the number of images */
+    animation: slide 30s infinite ease-in-out; /* Slow transition */
+}
+
     </style>
     <style>
         /* Keyframe for fade in/out effect */
@@ -34,7 +36,7 @@
 
         /* Apply animation */
         .animate-notif {
-            animation: fadeInOut 4s ease-in-out;
+            animation: fadeInOut 0.1s ease-in-out;
         }
     </style>
     <style>
@@ -43,7 +45,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out forwards;
+            animation: fadeIn 0.1s ease-out forwards;
         }
     </style>
 </head>
@@ -53,7 +55,7 @@
             <div class="flex w-full max-w-3xl h-full">
                 <div class="relative w-full flex justify-center items-center">
                     <div class="relative w-full max-w-2xl overflow-hidden">
-                        <div id="slider-<?php echo e($product->id); ?>" class="flex w-full h-full transition-transform duration-500 ease-in-out">
+                        <div id="slider-<?php echo e($product->id); ?>" class="flex w-full h-full transition-transform duration-5000 ease-in-out animate-slide">
                             <?php $__currentLoopData = json_decode($product->images, true) ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <img src="<?php echo e(asset('/' . $image)); ?>" 
                                     class="w-full h-full object-cover">
@@ -76,12 +78,12 @@
         <div  class="lg:w-[50%] w-full lg:h-[100vh] h-[70vh]   bg-cover bg-center bg-no-repeat">
             <div class="flex my-4 justify-center items-center">
             <img   src="/storage/<?php echo e($product->shop->image); ?>"
-     class="h-[50px] lg:h-[100px] w-[50px] lg:w-[100px] rounded-full m-5" alt="Shop Logo">
+                class="h-[50px] lg:h-[100px] w-[50px] lg:w-[100px] rounded-full m-5" alt="Shop Logo">
 
-<p class="text-center justify-center items-center font-bold text-xl lg:text-4xl text-[#002D62]">
-    <?php echo e(strtoupper($product->shop->name)); ?>
+            <p class="text-center justify-center items-center font-bold text-xl lg:text-4xl text-[#002D62]">
+                <?php echo e(strtoupper($product->shop->name)); ?>
 
-</p>
+            </p>
             </div>
             <div class=" w-full h-8  justify-end flex">
                 <div class="justify-end items-center m-5">
@@ -117,7 +119,7 @@
                             &times;
                         </button>
                         <h2 class="text-lg font-bold mb-2 text-black">Size Chart</h2>
-                        <img id="sizeChartImage" src="" alt="Size Chart" class="w-full max-h-full object-contain">
+                        <img id="sizeChartImage"  alt="Not Available" class="w-full max-h-full object-contain">
                     </div>
                 </div>
             <?php endif; ?>
@@ -173,6 +175,7 @@
                                 </optgroup>
                             <?php elseif($product->size_chart === 'dipsas_quarter_zip'): ?>
                                 <optgroup label="KIDS (QUARTER ZIP)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -262,6 +265,11 @@
                                 <optgroup label="TRUCKERS" class="text-[#002D62]">
                                     <option value="LARGE">LARGE</option>
                                     <option value="KIDS">KIDS</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'socks'): ?>
+                                <optgroup label="SOCKS" class="text-[#002D62]">
+                                    <option value="5-8">5-8</option>
+                                    <option value="8-11">8-11</option>
                                 </optgroup>
                              <?php elseif($product->size_chart === 'dipsas_warmup_tee'): ?>
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
@@ -376,8 +384,78 @@
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
+                             <?php elseif($product->size_chart === 'men_short'): ?>
+                                <optgroup label="MEN SHORTS" class="text-[#002D62]">
+                                    <option value="4">4</option>
+                                    <option value="6">6</option>
+                                    <option value="8">8</option>
+                                    <option value="10">10</option>
+                                    <option value="12">12</option>
+                                    <option value="14">14</option>
+                                    <option value="16">16</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </optgroup>
+                             <?php elseif($product->size_chart === 'dipsas_women_short'): ?>
+                                <optgroup label="WOMEN SHORTS" class="text-[#002D62]">
+                                    <option value="4">4</option>
+                                    <option value="6">6</option>
+                                    <option value="8">8</option>
+                                    <option value="10">10</option>
+                                    <option value="12">12</option>
+                                    <option value="14">14</option>
+                                    <option value="16">16</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </optgroup>
                             <?php elseif($product->size_chart === 'transition_trade_polo'): ?>
                                 <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">
+                                    <option value="ADULTS XS">ADULTS XS</option>
+                                    <option value="ADULTS S">ADULTS S</option>
+                                    <option value="ADULTS M">ADULTS M</option>
+                                    <option value="ADULTS L">ADULTS L</option>
+                                    <option value="ADULTS XL">ADULTS XL</option>
+                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
+                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
+                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
+                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
+                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
+                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'dipsas_spray_jacket'): ?>
+                                <optgroup label="ADULTS (SPRAY JACKET)" class="text-[#002D62]">
+                                    <option value="ADULTS XS">ADULTS XS</option>
+                                    <option value="ADULTS S">ADULTS S</option>
+                                    <option value="ADULTS M">ADULTS M</option>
+                                    <option value="ADULTS L">ADULTS L</option>
+                                    <option value="ADULTS XL">ADULTS XL</option>
+                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
+                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
+                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
+                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
+                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
+                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'dipsas_women_polo'): ?>
+                                <optgroup label="ADULTS (WOMEN'S POLO)" class="text-[#002D62]">
+                                    <option value="ADULTS XS">ADULTS XS</option>
+                                    <option value="ADULTS S">ADULTS S</option>
+                                    <option value="ADULTS M">ADULTS M</option>
+                                    <option value="ADULTS L">ADULTS L</option>
+                                    <option value="ADULTS XL">ADULTS XL</option>
+                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
+                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
+                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
+                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
+                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
+                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'dipsas_women_singlet'): ?>
+                                <optgroup label="ADULTS (WOMEN'S SINGLET)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>

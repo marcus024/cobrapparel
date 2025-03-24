@@ -104,4 +104,53 @@ class ProductController extends Controller
 
         return view('products', compact('shop', 'products'));
     }
+
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return response()->json($product);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name'  => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:20480',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $imagePaths = json_decode($product->images, true) ?? [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imagePath = $image->store('products', 'public');
+                copy(storage_path("app/public/{$imagePath}"), public_path("storage/{$imagePath}"));
+                $imagePaths[] = "storage/{$imagePath}";
+            }
+        }
+
+        $product->update([
+            'name'  => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'images' => json_encode($imagePaths),
+        ]);
+
+        return response()->json(['message' => 'Product updated successfully']);
+    }
+
+    public function removeImage(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $imagePaths = json_decode($product->images, true) ?? [];
+
+        if (($key = array_search($request->image, $imagePaths)) !== false) {
+            unset($imagePaths[$key]);
+            $product->update(['images' => json_encode(array_values($imagePaths))]);
+        }
+
+        return response()->json(['success' => true]);
+    }
 }

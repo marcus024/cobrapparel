@@ -79,8 +79,17 @@
                 <option value="dipsas_hoodie">Dipsas Hoodie</option>
                 <option value="dipsas_netball_dress">Dipsas Netball Dress</option>
                 <option value="dipsas_quarter_zip">Dipsas Quarter Zip</option>
+                
+                <option value="dipsas_women_short">Dipsas Women Short</option>
+                <option value="dipsas_women_polo">Dipsas Women Polo</option>
+                <option value="dipsas_women_singlet">Dipsas Women Singlet</option>
+                <option value="dipsas_spray_jacket">Dipsas Spray Jacket</option>
+
                 <option value="truckers">Truckers</option>
                 <option value="beanies">Beanies</option>
+
+                 <option value="socks">Socks</option>
+                    <option value="men_short">Men Short</option>
             </select>
         </div>
 
@@ -122,6 +131,80 @@
                 <button class="bg-gray-500 text-white px-4 py-2 rounded" onclick="document.getElementById('addProductModal').classList.add('hidden')">Cancel</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Edit Product Modal -->
+<div id="editProductModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-800 bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg w-1/3">
+        <h2 class="text-xl font-bold mb-4">Edit Product</h2>
+        
+        <form id="editProductForm" enctype="multipart/form-data">
+            <input type="hidden" id="editProductId">
+            
+            <div class="flex lg:flex-row ">
+                <div class="flex lg:flex-col">
+                    <label class="block text-sm font-semibold">Name</label>
+                    <input type="text" id="editProductName" class="w-full border p-2 rounded mb-2">
+                    
+                    <label class="block text-sm font-semibold">Price</label>
+                    <input type="number" id="editProductPrice" class="w-full border p-2 rounded mb-2">
+                    
+                    <label class="block text-sm font-semibold">Stock</label>
+                    <input type="number" id="editProductStock" class="w-full border p-2 rounded mb-2">
+                </div>
+                <div class="flex lg:flex-col">
+                    <label class="block text-sm font-semibold">Product End Date</label>
+                    <input type="text" id="editProductEndDate" class="w-full border p-2 rounded mb-2">
+                    
+                    <label class="block text-sm font-semibold">Custom Name</label>
+                    <input type="number" id="editProductCustomname" class="w-full border p-2 rounded mb-2">
+                    
+                    <label class="block text-sm font-semibold">Custom Number</label>
+                    <input type="number" id="editProductCustomnumber" class="w-full border p-2 rounded mb-2">
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mt-3">
+                <select id="editProductSizechart" class="border p-2 w-full bg-gray-200 " >
+                    <option value="" disabled selected>Check the box to enable</option>
+                    <option value="transition_singlet">Transition Singlet</option>
+                    <option value="transition_standard_polo">Transition Standard Polo</option>
+                    <option value="transition_trade_polo">Transition Trade Polo</option>
+                    <option value="transition_warmup_tee">Transition Warm Up Tee</option>
+                    <option value="transition_hoodie">Transition Hoodie</option>
+                    <option value="transition_netball_dress">Transition Netball Dress</option>
+                    <option value="dipsas_singlet">Dipsas Singlet</option>
+                    <option value="dipsas_standard_polo">Dipsas Standard Polo</option>
+                    <option value="dipsas_trade_polo">Dipsas Trade Polo</option>
+                    <option value="dipsas_warmup_tee">Dipsas Warm Up Tee</option>
+                    <option value="dipsas_hoodie">Dipsas Hoodie</option>
+                    <option value="dipsas_netball_dress">Dipsas Netball Dress</option>
+                    <option value="dipsas_quarter_zip">Dipsas Quarter Zip</option>
+                    
+                    <option value="dipsas_women_short">Dipsas Women Short</option>
+                    <option value="dipsas_women_polo">Dipsas Women Polo</option>
+                    <option value="dipsas_women_singlet">Dipsas Women Singlet</option>
+                    <option value="dipsas_spray_jacket">Dipsas Spray Jacket</option>
+
+                    <option value="truckers">Truckers</option>
+                    <option value="beanies">Beanies</option>
+
+                    <option value="socks">Socks</option>
+                    <option value="men_short">Men Short</option>
+                </select>
+            </div>
+            
+            <label class="block text-sm font-semibold">Current Images</label>
+            <div id="editProductImages" class="flex flex-wrap gap-2 mb-2"></div>
+
+            <label class="block text-sm font-semibold">Upload New Images</label>
+            <input type="file" id="newProductImages" multiple class="w-full border p-2 rounded mb-2">
+
+            <div class="flex justify-end space-x-2 mt-4">
+                <button type="button" onclick="closeEditModal()" class="bg-gray-500 text-white px-3 py-1 rounded">Cancel</button>
+                <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded">Save Changes</button>
+            </div>
+        </form>
     </div>
 </div>
 

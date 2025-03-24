@@ -95,6 +95,10 @@ Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
+Route::post('/products/{id}/update', [ProductController::class, 'update']);
+Route::post('/products/{id}/remove-image', [ProductController::class, 'removeImage']);
+Route::get('/products-fetch/{id}', [ProductController::class, 'show']);
+
 
 Route::get('/products/{id}', [ProductController::class, 'showProducts']);
 

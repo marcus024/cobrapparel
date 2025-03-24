@@ -291,7 +291,7 @@ function deleteShop(id) {
 
 <script>
 
- let selectedImages = []; // Store images persistently
+let selectedImages = []; // Store images persistently
 
 function previewImages() {
     const files = document.getElementById('productImages').files;
@@ -437,7 +437,7 @@ function addProduct() {
                         <td class="border border-gray-300 p-2">${formatSizeChart(product.size_chart)}</td>
                         <td class="border border-gray-300 p-2">${product.shop.name}</td>
                         <td class="border border-gray-300 p-3 flex space-x-2">
-                            <button onclick="editProduct(${product.id}, '${product.name}', '${product.stock}', '${product.price}', '${product.shop.id}')" 
+                            <button onclick="editProduct(${product.id}, '${product.name}', '${product.stock}', '${product.price}', '${product.shop.id}','${product.productEnd}', '${product.custom_name}', '${product.custom_number}', '${product.size_chart}')" 
                                 class="bg-blue-500 text-white px-2 py-1 rounded flex items-center space-x-1">
                                 <img src="/images/edit_shop.png" alt="Edit" class="h-5 w-5"> 
                                 <span>Edit</span>
@@ -455,6 +455,85 @@ function addProduct() {
         })
         .catch(error => console.error("Error fetching products:", error));
 }
+
+// edit
+function editProduct(id, name, stock, price, shopId, endDate, customName,customNumber, sizeChart) {
+    document.getElementById("editProductId").value = id;
+    document.getElementById("editProductName").value = name;
+    document.getElementById("editProductPrice").value = price;
+    document.getElementById("editProductStock").value = stock;
+    document.getElementById("editProductEndDate").value = endDate;
+    document.getElementById("editProductCustomname").value = customName;
+    document.getElementById("editProductCustomnumber").value = customNumber;
+    document.getElementById("editProductSizechart").value = sizeChart;
+
+    fetch(`/products-fetch/${id}`)
+        .then(response => response.json())
+        .then(product => {
+            let imageContainer = document.getElementById("editProductImages");
+            imageContainer.innerHTML = ""; 
+
+            let images = JSON.parse(product.images || "[]");
+            images.forEach((image, index) => {
+                let imgElement = document.createElement("div");
+                imgElement.innerHTML = `
+                    <div class="relative">
+                        <img src="/${image}" class="h-16 w-16 object-cover rounded">
+                        <button onclick="removeImage(${id}, '${image}', this)" 
+                            class="absolute top-0 right-0 bg-red-500 text-white px-2 text-xs rounded-full">
+                            ✕
+                        </button>
+                    </div>
+                `;
+                imageContainer.appendChild(imgElement);
+            });
+        });
+
+    document.getElementById("editProductModal").classList.remove("hidden");
+}
+
+function closeEditModal() {
+    document.getElementById("editProductModal").classList.add("hidden");
+}
+
+function removeImage(productId, imagePath, button) {
+    fetch(`/products/${productId}/remove-image`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content },
+        body: JSON.stringify({ image: imagePath })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            button.parentElement.remove();
+        }
+    })
+    .catch(error => console.error("Error removing image:", error));
+}
+
+document.getElementById("editProductForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+    let productId = document.getElementById("editProductId").value;
+
+    fetch(`/products/${productId}/update`, {
+        method: "POST",
+        body: formData,
+        headers: { "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content }
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        console.log("Product updated:", data);
+        closeEditModal();
+        fetchProducts(); // Refresh product list
+    })
+    .catch(error => console.error("Error updating product:", error));
+});
+
+
+// edit
 
 function deleteProduct(productId) {
     if (!confirm("Are you sure you want to delete this product?")) {
