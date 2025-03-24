@@ -198,6 +198,7 @@
                                 </optgroup>
                             <?php elseif($product->size_chart === 'dipsas_singlet'): ?>
                                 <optgroup label="KIDS (SINGLET)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -220,6 +221,7 @@
                                 </optgroup>
                             <?php elseif($product->size_chart === 'dipsas_standard_polo'): ?>
                                 <optgroup label="KIDS (STANDARD POLO)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -273,6 +275,7 @@
                                 </optgroup>
                              <?php elseif($product->size_chart === 'dipsas_warmup_tee'): ?>
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
                                     <option value="KIDS 10">KIDS 10</option>
@@ -393,10 +396,10 @@
                                     <option value="12">12</option>
                                     <option value="14">14</option>
                                     <option value="16">16</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
+                                    <option value="30-S">(30)S</option>
+                                    <option value="32-M">(32)M</option>
+                                    <option value="34-L">(34)L</option>
+                                    <option value="36-XL">(36)XL</option>
                                 </optgroup>
                              <?php elseif($product->size_chart === 'dipsas_women_short'): ?>
                                 <optgroup label="WOMEN SHORTS" class="text-[#002D62]">
@@ -407,10 +410,18 @@
                                     <option value="12">12</option>
                                     <option value="14">14</option>
                                     <option value="16">16</option>
+                                    <option value="2XS">2XS</option>
+                                    <option value="XS">XS</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
                                     <option value="XL">XL</option>
+                                    <option value="2XL">2XL</option>
+                                    <option value="3XL">3XL</option>
+                                    <option value="4XL">4XL</option>
+                                    <option value="5XL">5XL</option>
+                                    <option value="6XL">6XL</option>
+                                    <option value="7XL">7XL</option>
                                 </optgroup>
                             <?php elseif($product->size_chart === 'transition_trade_polo'): ?>
                                 <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">
