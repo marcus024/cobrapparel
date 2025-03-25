@@ -89,6 +89,7 @@
             <div class="relative w-full">
                 <input type="password" id="password" name="password" placeholder="Password" required 
                     class="border p-2 rounded w-full pr-10">
+                
                 <!-- Show/Hide Password Icon -->
                 
             </div>
