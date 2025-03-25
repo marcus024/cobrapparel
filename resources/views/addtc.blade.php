@@ -55,15 +55,12 @@
             <div class="flex w-full max-w-3xl h-full">
                 <div class="relative w-full flex justify-center items-center">
                     <div class="relative w-full max-w-2xl overflow-hidden">
-                        <div id="slider-{{ $product->id }}" class="flex w-full h-full transition-transform duration-5000 ease-in-out animate-slide">
+                        <div id="slider-{{ $product->id }}" class="flex w-full h-full transition-transform duration-700 ease-in-out">
                             @foreach(json_decode($product->images, true) ?? [] as $image)
-                                <img src="{{ asset('/' . $image) }}" 
-                                    class="w-full h-full object-cover">
+                                <img src="{{ asset('/' . $image) }}" class="w-full h-full object-cover flex-shrink-0">
                             @endforeach
                         </div>
                     </div>
-
-                    <!-- Navigation Buttons -->
                     <button onclick="prevSlide('{{ $product->id }}')" 
                         class="absolute left-2 bg-gray-700 text-white px-3 py-1 rounded-full">
                         ❮
@@ -785,38 +782,38 @@
     </script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let sliders = document.querySelectorAll("[id^='slider-']");
-
-        sliders.forEach(slider => {
-            let productId = slider.id.replace('slider-', '');
-            window["currentSlide_" + productId] = 0;
-            let totalSlides = slider.children.length;
-
-            // Auto-slide every 3 seconds
-            setInterval(() => {
-                nextSlide(productId);
-            }, 3000);
-        });
-    });
-
+   <script>
     function nextSlide(productId) {
-        let slider = document.getElementById("slider-" + productId);
-        let slides = slider.children;
-        let totalSlides = slides.length;
+        let slider = document.getElementById(`slider-${productId}`);
+        let firstImage = slider.firstElementChild;
 
-        window["currentSlide_" + productId] = (window["currentSlide_" + productId] + 1) % totalSlides;
-        slider.style.transform = `translateX(-${window["currentSlide_" + productId] * 100}%)`;
+        // Slide left
+        slider.style.transition = "transform 0.7s ease-in-out";
+        slider.style.transform = "translateX(-100%)";
+
+        setTimeout(() => {
+            slider.appendChild(firstImage); // Move first image to the end
+            slider.style.transition = "none"; // Remove transition for instant shift
+            slider.style.transform = "translateX(0)"; // Reset position
+        }, 700); // Matches transition duration
     }
 
     function prevSlide(productId) {
-        let slider = document.getElementById("slider-" + productId);
-        let slides = slider.children;
-        let totalSlides = slides.length;
+        let slider = document.getElementById(`slider-${productId}`);
+        let lastImage = slider.lastElementChild;
 
-        window["currentSlide_" + productId] = (window["currentSlide_" + productId] - 1 + totalSlides) % totalSlides;
-        slider.style.transform = `translateX(-${window["currentSlide_" + productId] * 100}%)`;
+        // Move last image to the front instantly
+        slider.insertBefore(lastImage, slider.firstElementChild);
+        slider.style.transition = "none"; // Disable transition for instant shift
+        slider.style.transform = "translateX(-100%)"; // Shift slider left instantly
+
+        setTimeout(() => {
+            // Animate slide back to original position
+            slider.style.transition = "transform 0.7s ease-in-out";
+            slider.style.transform = "translateX(0)";
+        }, 10); // Small delay to allow instant repositioning
     }
+</script>
 </script>
 <script>
     function toggleSizeChart(sizeChart = null) {
