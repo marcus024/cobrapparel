@@ -782,7 +782,6 @@
     </script>
 
     <script>
-   <script>
     function nextSlide(productId) {
         let slider = document.getElementById(`slider-${productId}`);
         let firstImage = slider.firstElementChild;
@@ -813,7 +812,6 @@
             slider.style.transform = "translateX(0)";
         }, 10); // Small delay to allow instant repositioning
     }
-</script>
 </script>
 <script>
     function toggleSizeChart(sizeChart = null) {
