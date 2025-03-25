@@ -371,10 +371,15 @@
                                     <option value="12">12</option>
                                     <option value="14">14</option>
                                     <option value="16">16</option>
+                                    <option value="28-XS">(28)XS</option>
                                     <option value="30-S">(30)S</option>
                                     <option value="32-M">(32)M</option>
                                     <option value="34-L">(34)L</option>
                                     <option value="36-XL">(36)XL</option>
+                                    <option value="38-2XL">(38)2XL</option>
+                                    <option value="40-3XL">(40)3XL</option>
+                                    <option value="42-4XL">(42)4XL</option>
+                                    <option value="44-5XL">(44)5XL</option>
                                 </optgroup>
                              @elseif ($product->size_chart === 'dipsas_women_short')
                                 <optgroup label="WOMEN SHORTS" class="text-[#002D62]">
