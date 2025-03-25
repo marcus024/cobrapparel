@@ -432,7 +432,21 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif  ($product->size_chart === 'dipsas_women_polo')
+                                <optgroup label="ADULTS (UNISEX)" class="text-[#002D62]">
+                                    <option value="ADULTS XS">ADULTS XS</option>
+                                    <option value="ADULTS S">ADULTS S</option>
+                                    <option value="ADULTS M">ADULTS M</option>
+                                    <option value="ADULTS L">ADULTS L</option>
+                                    <option value="ADULTS XL">ADULTS XL</option>
+                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
+                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
+                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
+                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
+                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
+                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
                                 <optgroup label="ADULTS (WOMEN'S POLO)" class="text-[#002D62]">
+                                    <option value="2XS-6">2XS(6)</option>
                                     <option value="XS-8">XS(8)</option>
                                     <option value="S-10">S(10)</option>
                                     <option value="M-12">M(12)</option>
