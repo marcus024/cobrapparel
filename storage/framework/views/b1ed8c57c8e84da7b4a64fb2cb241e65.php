@@ -12,17 +12,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
        @keyframes slide {
-    0%, 25% { transform: translateX(0%); } /* Stay longer before moving */
-    30%, 55% { transform: translateX(-100%); } /* Move to next slide and stay */
-    60%, 85% { transform: translateX(-200%); } /* Move to next slide and stay */
-    90%, 100% { transform: translateX(0%); } /* Loop back to first */
-}
+            0%, 25% { transform: translateX(0%); } /* Stay longer before moving */
+            30%, 55% { transform: translateX(-100%); } /* Move to next slide and stay */
+            60%, 85% { transform: translateX(-200%); } /* Move to next slide and stay */
+            90%, 100% { transform: translateX(0%); } /* Loop back to first */
+        }
 
-.animate-slide {
-    display: flex;
-    width: 300%; /* Adjust based on the number of images */
-    animation: slide 30s infinite ease-in-out; /* Slow transition */
-}
+        .animate-slide {
+            display: flex;
+            width: 300%; /* Adjust based on the number of images */
+            animation: slide 20s infinite ease-in-out; /* Slow transition */
+        }
 
     </style>
     <style>
@@ -105,7 +105,7 @@
             <div class="flex flex-col my-2 justify-start">
                 <p class="text-[#002D62] text-xs lg:text-lg font-bold ml-5">$ <?php echo e(number_format($product->price, 2)); ?> + GST</p>
             </div>
-            <?php if(!empty($product->size_chart)): ?>
+           <?php if(!empty($product->size_chart) && !in_array($product->size_chart, ['socks', 'men_short'])): ?>
                 <button onclick="toggleSizeChart('<?php echo e($product->size_chart); ?>')" 
                     class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-25 lg:w-35">
                     SIZE CHART
