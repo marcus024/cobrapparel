@@ -76,6 +76,7 @@
                 <option value="dipsas_standard_polo">Dipsas Standard Polo</option>
                 <option value="dipsas_trade_polo">Dipsas Trade Polo</option>
                 <option value="dipsas_warmup_tee">Dipsas Warm Up Tee</option>
+                <option value="dipsas_warmup_tee_long">Dipsas Warm Up Tee Long Sleeve</option>
                 <option value="dipsas_hoodie">Dipsas Hoodie</option>
                 <option value="dipsas_netball_dress">Dipsas Netball Dress</option>
                 <option value="dipsas_quarter_zip">Dipsas Quarter Zip</option>
