@@ -66,7 +66,7 @@ Route::post('/logout', function () {
 // Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 // Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::get('/admin/layouts/admin', function () {
     return view('admin.layouts.admin');
 })->middleware('auth')->name('admin.admin');
