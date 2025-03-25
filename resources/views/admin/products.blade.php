@@ -57,8 +57,6 @@
                     <input type="number" id="productStock" class="border p-2 w-full" placeholder="Stock Quantity">
                 </div>
             </div>
-
-            <!-- Size Chart Selection -->
             <div class="grid grid-cols-2 gap-3 mt-3">
                 <div class="flex items-center">
                     <input type="checkbox" id="sizeChartToggle" class="mr-2" onchange="toggleSizeChart()">
