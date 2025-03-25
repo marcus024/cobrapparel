@@ -194,29 +194,6 @@
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
-                            @elseif ($product->size_chart === 'dipsas_singlet')
-                                <optgroup label="KIDS (SINGLET)" class="text-[#002D62]">
-                                    <option value="KIDS 4">KIDS 4</option>
-                                    <option value="KIDS 6">KIDS 6</option>
-                                    <option value="KIDS 8">KIDS 8</option>
-                                    <option value="KIDS 10">KIDS 10</option>
-                                    <option value="KIDS 12">KIDS 12</option>
-                                    <option value="KIDS 14">KIDS 14</option>
-                                    <option value="KIDS 16">KIDS 16</option>
-                                </optgroup>
-                                <optgroup label="ADULTS (SINGLET)" class="text-[#002D62]">
-                                    <option value="ADULTS XS">ADULTS XS</option>
-                                    <option value="ADULTS S">ADULTS S</option>
-                                    <option value="ADULTS M">ADULTS M</option>
-                                    <option value="ADULTS L">ADULTS L</option>
-                                    <option value="ADULTS XL">ADULTS XL</option>
-                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
-                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
-                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
-                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
-                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
-                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
-                                </optgroup>
                             @elseif ($product->size_chart === 'dipsas_standard_polo')
                                 <optgroup label="KIDS (STANDARD POLO)" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
