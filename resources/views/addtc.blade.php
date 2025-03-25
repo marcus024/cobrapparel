@@ -245,8 +245,8 @@
                                 </optgroup>
                             @elseif ($product->size_chart === 'socks')
                                 <optgroup label="SOCKS" class="text-[#002D62]">
-                                    <option value="5-8">5-8</option>
-                                    <option value="8-11">8-11</option>
+                                    <option value="M(5-8)">M(5-8)</option>
+                                    <option value="L(8-11)">L(8-11)</option>
                                 </optgroup>
                              @elseif ($product->size_chart === 'dipsas_warmup_tee')
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
