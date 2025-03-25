@@ -390,15 +390,18 @@
                                     <option value="12">12</option>
                                     <option value="14">14</option>
                                     <option value="16">16</option>
-                                    <option value="28-XS">(28)XS</option>
-                                    <option value="30-S">(30)S</option>
-                                    <option value="32-M">(32)M</option>
-                                    <option value="34-L">(34)L</option>
-                                    <option value="36-XL">(36)XL</option>
-                                    <option value="38-2XL">(38)2XL</option>
-                                    <option value="40-3XL">(40)3XL</option>
-                                    <option value="42-4XL">(42)4XL</option>
-                                    <option value="44-5XL">(44)5XL</option>
+                                    <option value="2XS-6">2XS(6)</option>
+                                    <option value="XS-8">XS(8)</option>
+                                    <option value="S-10">S(10)</option>
+                                    <option value="M-12">M(12)</option>
+                                    <option value="L-14">L(14)</option>
+                                    <option value="XL-16">XL(16)</option>
+                                    <option value="XL-18">2XL(18)</option>
+                                    <option value="XL-20">3XL(20)</option>
+                                    <option value="XL-22">4XL(22)</option>
+                                    <option value="XL-24">5XL(24)</option>
+                                    <option value="XL-26">6XL(26)</option>
+                                    <option value="XL-28">7XL(28)</option>
                                 </optgroup>
                             @elseif  ($product->size_chart === 'transition_trade_polo')
                                 <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">
