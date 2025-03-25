@@ -149,7 +149,7 @@
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
-                            @if ($product->size_chart === 'dipsas_warmup_tee_long')
+                            @elseif ($product->size_chart === 'dipsas_warmup_tee_long')
                                 <optgroup label="KIDS (WARM UP TEE)" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
