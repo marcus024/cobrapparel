@@ -103,7 +103,7 @@
             <div class="flex flex-col my-2 justify-start">
                 <p class="text-[#002D62] text-xs lg:text-lg font-bold ml-5">$ {{ number_format($product->price, 2) }} + GST</p>
             </div>
-           @if (!empty($product->size_chart) && !in_array($product->size_chart, ['socks', 'men_short']))
+           @if (!empty($product->size_chart) && !in_array($product->size_chart, ['socks', 'men_short','beanies']))
                 <button onclick="toggleSizeChart('{{ $product->size_chart }}')" 
                     class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-25 lg:w-35">
                     SIZE CHART
