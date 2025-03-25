@@ -329,26 +329,26 @@ Our store is hosted on an e-commerce platform that provides us with the online t
 
 {{-- Scripts --}}
     <script>
-   document.addEventListener("DOMContentLoaded", function () {
-    fetch('/cart/items')
-        .then(response => response.json())
-        .then(cartItems => {
+        document.addEventListener("DOMContentLoaded", function () {
+            let cartItems = JSON.parse(localStorage.getItem("checkoutCart")) || [];
+
+            console.log("Loaded checkout items from localStorage:", cartItems);
+
             let checkoutHTML = "";
             let totalPay = 0;
 
             cartItems.forEach(item => {
-                let imagePath = "/default-image.jpg"; // Default fallback
+              
 
-                try {
-                    let imageArray = typeof item.image === "string" ? JSON.parse(item.image.replace(/&quot;/g, '"')) : item.image;
-                    if (Array.isArray(imageArray) && imageArray.length > 0) {
-                        imagePath = imageArray[0].startsWith("/") ? imageArray[0] : `/storage/${imageArray[0]}`;
-                    }
-                } catch (error) {
-                    console.error("Error parsing image path:", error);
+                let imagePath = item.image && typeof item.image === "string" ? item.image : "/default-image.jpg";
+
+                // Ensure image path starts with "/"
+                if (!imagePath.startsWith("/")) {
+                    imagePath = "/" + imagePath;
                 }
 
-                console.log("Final Image Path:", imagePath); // Debugging log
+
+                console.log("Final Image Path:", imagePath);
 
                 let itemTotal = parseFloat(item.price) * item.quantity;
                 totalPay += itemTotal;
@@ -365,32 +365,24 @@ Our store is hosted on an e-commerce platform that provides us with the online t
 
                 let totalElement = document.getElementById("totalBuy");
                 if (totalElement) {
-                  totalElement.innerHTML = `TOTAL <span>$${totalWithGST.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>`;
+                    totalElement.innerHTML = `TOTAL <span>$${totalWithGST.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>`;
                 } else {
-                    console.error("Element #gstSubtotal not found!");
+                    console.error("Element #totalBuy not found!");
                 }
 
                 checkoutHTML += `
                     <div class="flex lg:flex-row p-1">
                         <div class="flex h-16 w-25 lg:w-50 lg:h-32">
-                           <img src="${item.image}" alt="Product Image" onerror="this.src='/default-image.jpg'">
+                        <img src="${imagePath}" alt="Product Image" onerror="this.src='/default-image.jpg'">
                             <div class="relative top-1 h-4 lg:h-6 w-4 lg:w-6 pl-1 lg:pl-2 lg:pt-1 justify-center items-center bg-btn rounded-full">
                                 <p class="self-center ml-[1px] text-white text-[8px] lg:text-[10px] font-bold">${item.quantity}</p>
                             </div>
                         </div>
                         <div class="flex flex-col lg:h-30 lg:pl-20 justify-center">
-                            <p class="text-[8px] lg:text-[15px] main-color">
-                                 ${item.name}
-                            </p>
-                            <p class="text-[7px] lg:text-[12px] main-color">
-                                <span class="font-bold">Size:</span> ${item.size ?? "N/A"}
-                            </p>
-                            <p class="text-[7px] lg:text-[12px] main-color">
-                                <span class="font-bold">Custom Number:</span> ${item.custom_number ?? "N/A"}
-                            </p>
-                            <p class="text-[7px] lg:text-[12px] main-color">
-                                <span class="font-bold">Custom Name:</span> ${item.custom_name ?? "N/A"}
-                            </p>
+                            <p class="text-[8px] lg:text-[15px] main-color">${item.name}</p>
+                            <p class="text-[7px] lg:text-[12px] main-color"><span class="font-bold">Size:</span> ${item.size ?? "N/A"}</p>
+                            <p class="text-[7px] lg:text-[12px] main-color"><span class="font-bold">Custom Number:</span> ${item.custom_number ?? "N/A"}</p>
+                            <p class="text-[7px] lg:text-[12px] main-color"><span class="font-bold">Custom Name:</span> ${item.custom_name ?? "N/A"}</p>
                             <p class="text-[8px] lg:text-[12px] font-bold main-color">
                                 <span class="font-bold">Price:</span> $${parseFloat(item.price).toFixed(2)} + GST
                             </p>
@@ -401,11 +393,12 @@ Our store is hosted on an e-commerce platform that provides us with the online t
 
             document.getElementById("checkoutContent").innerHTML = checkoutHTML;
             document.getElementById("totalPay").innerHTML = `SUBTOTAL <span>$${totalPay.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>`;
-            
 
-        })
-        .catch(error => console.error("Error fetching cart items:", error));
-});
+            console.log("Checkout content updated successfully.");
+            console.log(JSON.parse(localStorage.getItem("checkoutCart")));
+
+        });
+
 
 
 </script>

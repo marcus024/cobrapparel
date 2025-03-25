@@ -184,8 +184,6 @@
                         </li>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
-
-                <!-- Display Reference Code -->
                 
                 <div class="reference-code mt-3" style="margin-left: 20px;">
                     <p><strong>Reference Code:</strong> <?php echo e($order->reference_code); ?></p>

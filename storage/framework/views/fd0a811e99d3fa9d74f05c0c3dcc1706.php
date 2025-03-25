@@ -231,23 +231,22 @@ document.addEventListener("DOMContentLoaded", loadCartItems);
 </script>
 <script>
     function saveCartItems() {
-        fetch('/cart/items')
-            .then(response => response.json())
-            .then(cartItems => {
-                
-                if (cartItems.length > 0) {
-                    localStorage.setItem('checkoutCart', JSON.stringify(cartItems)); // Store cart items
-                showNotification("Redirecting to checkout","green");
-                    // Redirect to checkout page
-                    window.location.href = "<?php echo e(route('checkout')); ?>";
-                } else {
-                    alert('Your cart is empty. Please add items before proceeding to checkout.');
-                }
-            })
-            .catch(error => {
-                console.error('Error saving cart items:', error);
-                alert('Failed to save cart items. Please try again.');
-            });
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+        console.log("Cart items retrieved from localStorage:", cartItems);
+
+        if (cartItems.length > 0) {
+            localStorage.setItem('checkoutCart', JSON.stringify(cartItems)); // Store cart items
+            console.log("Cart items saved to checkoutCart in localStorage:", cartItems);
+
+            showNotification("Redirecting to checkout", "green");
+            
+            console.log("Redirecting to checkout page...");
+            window.location.href = "/checkout"; // Update with the actual checkout URL
+        } else {
+            console.warn("Cart is empty. Cannot proceed to checkout.");
+            alert('Your cart is empty. Please add items before proceeding to checkout.');
+        }
     }
 </script>
 
