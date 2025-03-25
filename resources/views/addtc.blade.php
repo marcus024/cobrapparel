@@ -463,20 +463,6 @@
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
-                            @elseif  ($product->size_chart === 'dipsas_women_singlet')
-                                <optgroup label="ADULTS (WOMEN'S SINGLET)" class="text-[#002D62]">
-                                    <option value="ADULTS XS">ADULTS XS</option>
-                                    <option value="ADULTS S">ADULTS S</option>
-                                    <option value="ADULTS M">ADULTS M</option>
-                                    <option value="ADULTS L">ADULTS L</option>
-                                    <option value="ADULTS XL">ADULTS XL</option>
-                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
-                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
-                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
-                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
-                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
-                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
-                                </optgroup>
                             @elseif ($product->size_chart === 'transition_warmup_tee')
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
