@@ -195,7 +195,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_standard_polo')
-                                <optgroup label="KIDS (STANDARD POLO)" class="text-[#002D62]">
+                                <optgroup label="KIDS" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
@@ -204,7 +204,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (STANDARD POLO)" class="text-[#002D62]">
+                                <optgroup label="ADULTS UNISEX" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -216,6 +216,19 @@
                                     <option value="ADULTS 5XL">ADULTS 5XL</option>
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                                <optgroup label="ADULTS WOMEN'S" class="text-[#002D62]">
+                                    <option value="XS/8">XS/8</option>
+                                    <option value="S/10">S/10</option>
+                                    <option value="M/12">M/12</option>
+                                    <option value="L/14">L/14</option>
+                                    <option value="XL/16">XL/16</option>
+                                    <option value="2XL/18">2XL/18</option>
+                                    <option value="3XL/20">3XL/20</option>
+                                    <option value="4XL/22">4XL/22</option>
+                                    <option value="5XL/24">5XL/24</option>
+                                    <option value="6XL/26">6XL/26</option>
+                                    <option value="7XL/28">7XL/28</option>
                                 </optgroup>
                             @elseif ($product->size_chart === 'dipsas_trade_polo')
                                 <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">

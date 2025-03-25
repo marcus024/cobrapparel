@@ -79,16 +79,13 @@
                 <option value="dipsas_hoodie">Dipsas Hoodie</option>
                 <option value="dipsas_netball_dress">Dipsas Netball Dress</option>
                 <option value="dipsas_quarter_zip">Dipsas Quarter Zip</option>
-                
                 <option value="dipsas_women_short">Dipsas Women Short</option>
                 <option value="dipsas_women_polo">Dipsas Women Polo</option>
                 <option value="dipsas_spray_jacket">Dipsas Spray Jacket</option>
-
                 <option value="truckers">Truckers</option>
                 <option value="beanies">Beanies</option>
-
-                 <option value="socks">Socks</option>
-                    <option value="men_short">Men Short</option>
+                <option value="socks">Socks</option>
+                <option value="men_short">Men Short</option>
             </select>
         </div>
 
