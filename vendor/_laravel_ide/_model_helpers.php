@@ -294,14 +294,12 @@ namespace App\Models {
      * @property string $email
      * @property string $last_name
      * @property string $first_name
-     * @property string $order_id
      * @property string $status
      * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItem> $items
      * @property-read int|null $items_count
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereOrderId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereFirstName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereLastName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereEmail($value)
@@ -1132,11 +1130,10 @@ namespace App\Models {
     /**
      * App\Models\Shop
      *
-     * @property string $emailAddress
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string|null $image
-     * @property string|null $duration
+     * @property string $duration
      * @property string $contact_number
      * @property string $contact_name
      * @property string $owner
@@ -1151,7 +1148,6 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Shop>|Shop whereImage($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Shop>|Shop whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Shop>|Shop whereUpdatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Shop>|Shop whereEmailaddress($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Shop>|Shop newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Shop>|Shop newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Shop>|Shop query()

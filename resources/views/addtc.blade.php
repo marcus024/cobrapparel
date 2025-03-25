@@ -571,7 +571,7 @@
                 @endif
                 <!-- Order Count -->
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center w-20 lg:w-30 border border-[#002d62] bg-white border-2 ">
+                    <div class="flex items-center justify-between w-20 lg:w-[100px] border border-[#002d62] bg-white border-2 ">
                         <button onclick="decreaseCount()" class="px-2  text-[#002D62] text-xs lg:text-lg">-</button>
                         <span id="orderCount" class="px-2 text-lg text-[#002D62] font-bold text-xs lg:text-lg">1</span>
                         <button onclick="increaseCount()" class="px-2  text-[#002D62] text-xs lg:text-lg ">+</button>
@@ -586,7 +586,7 @@
                 </div> --}}
                 
                 <div class="flex flex-col mt-1">
-                    <button onclick="addToCart()"
+                    <button onclick="addToCart('{{ $product->name }}', {{ $product->price }}, '{{ $image }}')"
                         class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-50 lg:w-70">
                         ADD TO CART
                     </button>
@@ -674,7 +674,11 @@
 
 </script>
     <script>
-        function addToCart() {
+        function generateUniqueId() {
+            return 'id-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        }
+
+        function addToCart(productName, productPrice, imagePath) {
             let count = parseInt(document.getElementById("orderCount").innerText) || 1;
             let sizeSelect = document.getElementById("size");
             let productEnd = "{{ $product->productEnd }}"; 
@@ -690,29 +694,16 @@
             }
 
             let product = {
-                id: "{{ $product->id }}", 
-                name: "{{ $product->name }}",
-                price: "{{ $product->price }}",
-                image: "{{ $imagePath }}",
+                id: generateUniqueId(), // ✅ Generates a unique ID for every cart addition
+                name: productName, 
+                price: productPrice, 
+                image: imagePath, 
                 quantity: count,
                 size: sizeSelect ? sizeSelect.value : null,
                 color: null,
                 custom_name: null,
                 custom_number: null,
             };
-
-            if (sizeSelect) {
-                sizeSelect.addEventListener("change", function () {
-                    product.size = this.value;
-                    console.log("Selected Size:", product.size);
-                });
-            }
-
-            // Check if product name contains "polo" and get the selected size
-            if (product.name.toLowerCase().includes("polo")) {
-                let sizeElement = document.getElementById("size");
-                product.size = sizeElement ? sizeElement.value : null;
-            }
 
             // Get custom name and number using their IDs
             let customNameInput = document.getElementById("custom_name");
@@ -722,19 +713,9 @@
 
             // Retrieve cart from localStorage
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            let existingProductIndex = cart.findIndex(
-                item => item.id === product.id && 
-                        item.size === product.size && 
-                        item.color === product.color &&
-                        item.customName === product.customName &&
-                        item.customNumber === product.customNumber
-            );
-
-            if (existingProductIndex !== -1) {
-                cart[existingProductIndex].quantity += product.quantity;
-            } else {
-                cart.push(product);
-            }
+            
+            // Push the product to the cart (Each item will always have a unique ID)
+            cart.push(product);
 
             // Save updated cart to localStorage
             localStorage.setItem("cart", JSON.stringify(cart));
@@ -742,28 +723,11 @@
             console.log("Added to cart:", product);
             console.log("Updated cart:", cart);
 
-            // Send data to the server
-            fetch('/cart/add', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify(product)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => console.log('Server response:', data))
-            .catch(error => console.error('Error:', error));
-
-
-           showNotification();
-          
+            showNotification();
         }
+
+
+
 
         // Quantity Management
         function decreaseCount() {
@@ -820,7 +784,6 @@
         }, 7000); // 7 seconds interval
     }
 
-    // Start auto-slide when the page loads
     document.addEventListener("DOMContentLoaded", function() {
         autoSlide("{{ $product->id }}");
     });

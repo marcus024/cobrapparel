@@ -121,140 +121,134 @@
     }
     </script>
 
-    <script>
- function loadCartItems() {
-    fetch('/cart/items')
-        .then(response => response.json())
-        .then(cartItems => {
-            let cartHTML = "";
-            let totalPay = 0; // Initialize total amount
+   <script>
+    function loadCartItems() {
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || []; // Retrieve cart from localStorage
+        let cartHTML = "";
+        let totalPay = 0; // Initialize total amount
 
-            cartItems.forEach(item => {
-                let imagePath = "/default-image.jpg"; // Default fallback
-                
-                // Ensure image is correctly parsed from JSON
-                try {
-                    let imageArray = JSON.parse(item.image.replace(/&quot;/g, '"')); // Convert encoded quotes
+        cartItems.forEach(item => {
+            let imagePath = "/default-image.jpg"; // Default fallback
+
+             try {
+                // Check if the image is a JSON array (stringified)
+                if (typeof item.image === "string" && item.image.startsWith("[")) {
+                    let imageArray = JSON.parse(item.image); // Parse if it's a JSON array
                     if (Array.isArray(imageArray) && imageArray.length > 0) {
                         imagePath = `/${imageArray[0]}`; // Get the first image
                     }
-                } catch (error) {
-                    console.error("Error parsing image path:", error);
+                } else {
+                    // If item.image is already a valid string path, use it directly
+                    imagePath = `/${item.image}`;
                 }
+            } catch (error) {
+                console.error("Error parsing image path:", error);
+            }
 
-                let itemTotal = parseFloat(item.price) * item.quantity; // Calculate total price per item
-                totalPay += itemTotal; // Add item price to total amount
+            let itemTotal = parseFloat(item.price) * item.quantity; // Calculate total price per item
+            totalPay += itemTotal; // Add item price to total amount
 
-                cartHTML += `
-                    <div class="flex p-1" id="product-${item.id}">
-                        <div id="item" class="flex w-[140px] lg:w-[600px]">
-                            <div id="productImage" class="h-[30px] lg:w-[150px] lg:h-[150px] w-[30px] mr-2">
-                                <img src="${item.image}" alt="Product Image" onerror="this.src='/default-image.jpg'">
-                            </div>
-                            <div class="flex flex-col lg:h-30 lg:pl-20 justify-center">
-                                <p id="productName" class="text-[8px] lg:text-[20px] main-color">${item.name}</p>
-                                <p class="text-[7px] lg:text-[15px] main-color">
-                                    <span class="font-bold">Size:</span> ${item.size ?? "N/A"}
-                                </p>
-
-                                <p class="text-[7px] lg:text-[15px] main-color">
-                                    <span class="font-bold">Custom Number:</span> ${item.custom_number ?? "N/A"}
-                                </p>
-
-                                <p class="text-[7px] lg:text-[15px] main-color">
-                                    <span class="font-bold">Custom Name:</span> ${item.custom_name ?? "N/A"}
-                                </p>
-                                <p id="productPrice" class="text-[8px] lg:text-[15px] font-bold main-color">$${parseFloat(item.price).toFixed(2)} + GST</p>
-                            </div>
+            cartHTML += `
+                <div class="flex p-1" id="product-${item.id}">
+                    <div id="item" class="flex w-[140px] lg:w-[600px]">
+                        <div id="productImage" class="h-[30px] lg:w-[150px] lg:h-[150px] w-[30px] mr-2">
+                            <img src="${imagePath}" alt="Product Image" onerror="this.src='/default-image.jpg'">
                         </div>
-                        <div id="item" class="flex flex-col items-center justify-center mx-2 w-[70px] lg:h-30 lg:w-[150px]">
-                            <div class="flex items-center justify-between w-12 h-6 lg:w-20 lg:h-10 px-1 border border-[#700101] lg:border-2 border-1">
-                                <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})" class="px-1 main-color text-xs lg:text-lg">-</button>
-                                <span id="orderCount-${item.id}" class="px-1 text-sm main-color text-xs lg:text-[15px]">${item.quantity}</span>
-                                <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})" class="px-1 main-color text-xs lg:text-[15px]">+</button>
-                            </div>
-                            <p onclick="removeFromCart(${item.id})" class="main-color cursor-pointer font-mono mt-1 underline text-[9px] lg:text-[15px]">Remove</p>
-                        </div>
-                        <div id="item" class="flex justify-center lg:items-center lg:h-30 w-[60px] lg:w-[450px] lg:pl-36">
-                            <p id="price" class="main-color text-[8px] lg:text-[20px] font-bold">$${itemTotal.toFixed(2)} + GST</p>
+                        <div class="flex flex-col lg:h-30 lg:pl-20 justify-center">
+                            <p id="productName" class="text-[8px] lg:text-[20px] main-color">${item.name}</p>
+                            <p class="text-[7px] lg:text-[15px] main-color">
+                                <span class="font-bold">Size:</span> ${item.size ?? "N/A"}
+                            </p>
+                            <p class="text-[7px] lg:text-[15px] main-color">
+                                <span class="font-bold">Custom Number:</span> ${item.custom_number ?? "N/A"}
+                            </p>
+                            <p class="text-[7px] lg:text-[15px] main-color">
+                                <span class="font-bold">Custom Name:</span> ${item.custom_name ?? "N/A"}
+                            </p>
+                            <p id="productPrice" class="text-[8px] lg:text-[15px] font-bold main-color">$${parseFloat(item.price).toFixed(2)} + GST</p>
                         </div>
                     </div>
-                `;
-            });
+                    <div id="item" class="flex flex-col items-center justify-center mx-2 w-[70px] lg:h-30 lg:w-[150px]">
+                        <div class="flex items-center justify-between w-12 h-6 lg:w-20 lg:h-10 px-1 border border-[#700101] lg:border-2 border-1">
+                            <button onclick="updateQuantity('${item.id}', 'decrease')" class="px-1 main-color text-xs lg:text-lg">-</button>
+                            <span id="orderCount-${item.id}" class="px-1 text-sm main-color text-xs lg:text-[15px]">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', 'increase')" class="px-1 main-color text-xs lg:text-[15px]">+</button>
+                        </div>
+                        <p onclick="removeFromCart('${item.id}')" class="main-color cursor-pointer font-mono mt-1 underline text-[9px] lg:text-[15px]">Remove</p>
+                    </div>
+                    <div id="item" class="flex justify-center lg:items-center lg:h-30 w-[60px] lg:w-[450px] lg:pl-36">
+                        <p id="price" class="main-color text-[8px] lg:text-[20px] font-bold">$${itemTotal.toFixed(2)} + GST</p>
+                    </div>
+                </div>
+            `;
+        });
 
-            // Update the total payment
-            document.getElementById("content").innerHTML = cartHTML;
-           document.getElementById("totalPay").innerHTML = 
-        `TOTAL <span>$${totalPay.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} + GST</span>`;
-        })
-        .catch(error => console.error('Error fetching cart items:', error));
-}
+        // Update the total payment
+        document.getElementById("content").innerHTML = cartHTML;
+        document.getElementById("totalPay").innerHTML = 
+            `TOTAL <span>$${totalPay.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} + GST</span>`;
+    }
 
-// Function to remove an item from the cart
-function removeFromCart(itemId) {
-    fetch(`/cart/remove/${itemId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Add CSRF token
+
+    function removeFromCart(uniqueId) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Find the exact product and remove it
+        cart = cart.filter(item => item.id !== uniqueId);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        console.log("Item removed from cart:", uniqueId);
+
+        // Update UI
+        loadCartItems();
+    }
+
+    function updateQuantity(itemId, action) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let itemIndex = cart.findIndex(item => item.id === itemId);
+
+        if (itemIndex !== -1) {
+            let currentQuantity = cart[itemIndex].quantity;
+            let newQuantity = action === "increase" ? currentQuantity + 1 : currentQuantity - 1;
+
+            if (newQuantity < 1) return; // Prevent negative quantity
+
+            cart[itemIndex].quantity = newQuantity;
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            console.log(`Updated quantity for item ${itemId}: ${newQuantity}`);
+
+            // Update only the specific item quantity in the UI
+            let quantityElement = document.getElementById(`orderCount-${itemId}`);
+            if (quantityElement) {
+                quantityElement.textContent = newQuantity;
+            }
+            loadCartItems();
         }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
-        // showNotification("Removed from cart","red");
-        loadCartItems(); // Refresh the cart display
-    })
-    .catch(error => console.error('Error removing item:', error));
-}
+    }
 
-// Function to update item quantity in the cart
-function updateQuantity(itemId, newQuantity) {
-    if (newQuantity < 1) return; // Prevent zero or negative quantity
-
-    fetch(`/cart/update`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Add CSRF token
-        },
-        body: JSON.stringify({ id: itemId, quantity: newQuantity })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
-        
-        loadCartItems(); // Refresh the cart display
-    })
-    .catch(error => console.error('Error updating quantity:', error));
-}
-
-// Load cart items when the page loads
 document.addEventListener("DOMContentLoaded", loadCartItems);
-
 </script>
 <script>
-function saveCartItems() {
-
-
-    fetch('/cart/items')
-        .then(response => response.json())
-        .then(cartItems => {
-            
-            if (cartItems.length > 0) {
-                localStorage.setItem('checkoutCart', JSON.stringify(cartItems)); // Store cart items
-showNotification("Redirecting to checkout","green");
-                // Redirect to checkout page
-                window.location.href = "<?php echo e(route('checkout')); ?>";
-            } else {
-                alert('Your cart is empty. Please add items before proceeding to checkout.');
-            }
-        })
-        .catch(error => {
-            console.error('Error saving cart items:', error);
-            alert('Failed to save cart items. Please try again.');
-        });
-}
+    function saveCartItems() {
+        fetch('/cart/items')
+            .then(response => response.json())
+            .then(cartItems => {
+                
+                if (cartItems.length > 0) {
+                    localStorage.setItem('checkoutCart', JSON.stringify(cartItems)); // Store cart items
+                showNotification("Redirecting to checkout","green");
+                    // Redirect to checkout page
+                    window.location.href = "<?php echo e(route('checkout')); ?>";
+                } else {
+                    alert('Your cart is empty. Please add items before proceeding to checkout.');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving cart items:', error);
+                alert('Failed to save cart items. Please try again.');
+            });
+    }
 </script>
 
 </body>

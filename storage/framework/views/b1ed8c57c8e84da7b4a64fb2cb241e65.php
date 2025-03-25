@@ -55,15 +55,12 @@
             <div class="flex w-full max-w-3xl h-full">
                 <div class="relative w-full flex justify-center items-center">
                     <div class="relative w-full max-w-2xl overflow-hidden">
-                        <div id="slider-<?php echo e($product->id); ?>" class="flex w-full h-full transition-transform duration-5000 ease-in-out animate-slide">
+                        <div id="slider-<?php echo e($product->id); ?>" class="flex w-full h-full transition-transform duration-700 ease-in-out">
                             <?php $__currentLoopData = json_decode($product->images, true) ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <img src="<?php echo e(asset('/' . $image)); ?>" 
-                                    class="w-full h-full object-cover">
+                                <img src="<?php echo e(asset('/' . $image)); ?>" class="w-full h-full object-cover flex-shrink-0">
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
-
-                    <!-- Navigation Buttons -->
                     <button onclick="prevSlide('<?php echo e($product->id); ?>')" 
                         class="absolute left-2 bg-gray-700 text-white px-3 py-1 rounded-full">
                         ❮
@@ -105,7 +102,7 @@
             <div class="flex flex-col my-2 justify-start">
                 <p class="text-[#002D62] text-xs lg:text-lg font-bold ml-5">$ <?php echo e(number_format($product->price, 2)); ?> + GST</p>
             </div>
-           <?php if(!empty($product->size_chart) && !in_array($product->size_chart, ['socks', 'men_short'])): ?>
+           <?php if(!empty($product->size_chart) && !in_array($product->size_chart, ['socks', 'men_short','beanies','truckers'])): ?>
                 <button onclick="toggleSizeChart('<?php echo e($product->size_chart); ?>')" 
                     class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-25 lg:w-35">
                     SIZE CHART
@@ -139,6 +136,29 @@
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
                                 <optgroup label="ADULTS (HOODIE)" class="text-[#002D62]">
+                                    <option value="ADULTS XS">ADULTS XS</option>
+                                    <option value="ADULTS S">ADULTS S</option>
+                                    <option value="ADULTS M">ADULTS M</option>
+                                    <option value="ADULTS L">ADULTS L</option>
+                                    <option value="ADULTS XL">ADULTS XL</option>
+                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
+                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
+                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
+                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
+                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
+                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'dipsas_warmup_tee_long'): ?>
+                                <optgroup label="KIDS (WARM UP TEE)" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
+                                    <option value="KIDS 6">KIDS 6</option>
+                                    <option value="KIDS 8">KIDS 8</option>
+                                    <option value="KIDS 10">KIDS 10</option>
+                                    <option value="KIDS 12">KIDS 12</option>
+                                    <option value="KIDS 14">KIDS 14</option>
+                                    <option value="KIDS 16">KIDS 16</option>
+                                </optgroup>
+                                <optgroup label="ADULTS (WARM UP TEE)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -196,31 +216,8 @@
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
-                            <?php elseif($product->size_chart === 'dipsas_singlet'): ?>
-                                <optgroup label="KIDS (SINGLET)" class="text-[#002D62]">
-                                    <option value="KIDS 4">KIDS 4</option>
-                                    <option value="KIDS 6">KIDS 6</option>
-                                    <option value="KIDS 8">KIDS 8</option>
-                                    <option value="KIDS 10">KIDS 10</option>
-                                    <option value="KIDS 12">KIDS 12</option>
-                                    <option value="KIDS 14">KIDS 14</option>
-                                    <option value="KIDS 16">KIDS 16</option>
-                                </optgroup>
-                                <optgroup label="ADULTS (SINGLET)" class="text-[#002D62]">
-                                    <option value="ADULTS XS">ADULTS XS</option>
-                                    <option value="ADULTS S">ADULTS S</option>
-                                    <option value="ADULTS M">ADULTS M</option>
-                                    <option value="ADULTS L">ADULTS L</option>
-                                    <option value="ADULTS XL">ADULTS XL</option>
-                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
-                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
-                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
-                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
-                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
-                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
-                                </optgroup>
                             <?php elseif($product->size_chart === 'dipsas_standard_polo'): ?>
-                                <optgroup label="KIDS (STANDARD POLO)" class="text-[#002D62]">
+                                <optgroup label="KIDS" class="text-[#002D62]">
                                     <option value="KIDS 4">KIDS 4</option>
                                     <option value="KIDS 6">KIDS 6</option>
                                     <option value="KIDS 8">KIDS 8</option>
@@ -229,7 +226,7 @@
                                     <option value="KIDS 14">KIDS 14</option>
                                     <option value="KIDS 16">KIDS 16</option>
                                 </optgroup>
-                                <optgroup label="ADULTS (STANDARD POLO)" class="text-[#002D62]">
+                                <optgroup label="ADULTS UNISEX" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -241,6 +238,55 @@
                                     <option value="ADULTS 5XL">ADULTS 5XL</option>
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                                <optgroup label="ADULTS WOMEN'S" class="text-[#002D62]">
+                                    <option value="XS/8">XS/8</option>
+                                    <option value="S/10">S/10</option>
+                                    <option value="M/12">M/12</option>
+                                    <option value="L/14">L/14</option>
+                                    <option value="XL/16">XL/16</option>
+                                    <option value="2XL/18">2XL/18</option>
+                                    <option value="3XL/20">3XL/20</option>
+                                    <option value="4XL/22">4XL/22</option>
+                                    <option value="5XL/24">5XL/24</option>
+                                    <option value="6XL/26">6XL/26</option>
+                                    <option value="7XL/28">7XL/28</option>
+                                </optgroup>
+                            <?php elseif($product->size_chart === 'dipsas_singlet'): ?>
+                                <optgroup label="KIDS" class="text-[#002D62]">
+                                    <option value="KIDS 4">KIDS 4</option>
+                                    <option value="KIDS 6">KIDS 6</option>
+                                    <option value="KIDS 8">KIDS 8</option>
+                                    <option value="KIDS 10">KIDS 10</option>
+                                    <option value="KIDS 12">KIDS 12</option>
+                                    <option value="KIDS 14">KIDS 14</option>
+                                    <option value="KIDS 16">KIDS 16</option>
+                                </optgroup>
+                                <optgroup label="ADULTS UNISEX" class="text-[#002D62]">
+                                    <option value="ADULTS XS">ADULTS XS</option>
+                                    <option value="ADULTS S">ADULTS S</option>
+                                    <option value="ADULTS M">ADULTS M</option>
+                                    <option value="ADULTS L">ADULTS L</option>
+                                    <option value="ADULTS XL">ADULTS XL</option>
+                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
+                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
+                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
+                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
+                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
+                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                </optgroup>
+                                <optgroup label="ADULTS WOMEN'S" class="text-[#002D62]">
+                                    <option value="XS/8">XS/8</option>
+                                    <option value="S/10">S/10</option>
+                                    <option value="M/12">M/12</option>
+                                    <option value="L/14">L/14</option>
+                                    <option value="XL/16">XL/16</option>
+                                    <option value="2XL/18">2XL/18</option>
+                                    <option value="3XL/20">3XL/20</option>
+                                    <option value="4XL/22">4XL/22</option>
+                                    <option value="5XL/24">5XL/24</option>
+                                    <option value="6XL/26">6XL/26</option>
+                                    <option value="7XL/28">7XL/28</option>
                                 </optgroup>
                             <?php elseif($product->size_chart === 'dipsas_trade_polo'): ?>
                                 <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">
@@ -270,8 +316,8 @@
                                 </optgroup>
                             <?php elseif($product->size_chart === 'socks'): ?>
                                 <optgroup label="SOCKS" class="text-[#002D62]">
-                                    <option value="5-8">5-8</option>
-                                    <option value="8-11">8-11</option>
+                                    <option value="M(5-8)">M(5-8)</option>
+                                    <option value="L(8-11)">L(8-11)</option>
                                 </optgroup>
                              <?php elseif($product->size_chart === 'dipsas_warmup_tee'): ?>
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
@@ -396,10 +442,15 @@
                                     <option value="12">12</option>
                                     <option value="14">14</option>
                                     <option value="16">16</option>
+                                    <option value="28-XS">(28)XS</option>
                                     <option value="30-S">(30)S</option>
                                     <option value="32-M">(32)M</option>
                                     <option value="34-L">(34)L</option>
                                     <option value="36-XL">(36)XL</option>
+                                    <option value="38-2XL">(38)2XL</option>
+                                    <option value="40-3XL">(40)3XL</option>
+                                    <option value="42-4XL">(42)4XL</option>
+                                    <option value="44-5XL">(44)5XL</option>
                                 </optgroup>
                              <?php elseif($product->size_chart === 'dipsas_women_short'): ?>
                                 <optgroup label="WOMEN SHORTS" class="text-[#002D62]">
@@ -410,18 +461,18 @@
                                     <option value="12">12</option>
                                     <option value="14">14</option>
                                     <option value="16">16</option>
-                                    <option value="2XS">2XS</option>
-                                    <option value="XS">XS</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="2XL">2XL</option>
-                                    <option value="3XL">3XL</option>
-                                    <option value="4XL">4XL</option>
-                                    <option value="5XL">5XL</option>
-                                    <option value="6XL">6XL</option>
-                                    <option value="7XL">7XL</option>
+                                    <option value="2XS-6">2XS(6)</option>
+                                    <option value="XS-8">XS(8)</option>
+                                    <option value="S-10">S(10)</option>
+                                    <option value="M-12">M(12)</option>
+                                    <option value="L-14">L(14)</option>
+                                    <option value="XL-16">XL(16)</option>
+                                    <option value="XL-18">2XL(18)</option>
+                                    <option value="XL-20">3XL(20)</option>
+                                    <option value="XL-22">4XL(22)</option>
+                                    <option value="XL-24">5XL(24)</option>
+                                    <option value="XL-26">6XL(26)</option>
+                                    <option value="XL-28">7XL(28)</option>
                                 </optgroup>
                             <?php elseif($product->size_chart === 'transition_trade_polo'): ?>
                                 <optgroup label="ADULTS (TRADE POLO)" class="text-[#002D62]">
@@ -452,7 +503,7 @@
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
                             <?php elseif($product->size_chart === 'dipsas_women_polo'): ?>
-                                <optgroup label="ADULTS (WOMEN'S POLO)" class="text-[#002D62]">
+                                <optgroup label="ADULTS (UNISEX)" class="text-[#002D62]">
                                     <option value="ADULTS XS">ADULTS XS</option>
                                     <option value="ADULTS S">ADULTS S</option>
                                     <option value="ADULTS M">ADULTS M</option>
@@ -465,19 +516,19 @@
                                     <option value="ADULTS 6XL">ADULTS 6XL</option>
                                     <option value="ADULTS 7XL">ADULTS 7XL</option>
                                 </optgroup>
-                            <?php elseif($product->size_chart === 'dipsas_women_singlet'): ?>
-                                <optgroup label="ADULTS (WOMEN'S SINGLET)" class="text-[#002D62]">
-                                    <option value="ADULTS XS">ADULTS XS</option>
-                                    <option value="ADULTS S">ADULTS S</option>
-                                    <option value="ADULTS M">ADULTS M</option>
-                                    <option value="ADULTS L">ADULTS L</option>
-                                    <option value="ADULTS XL">ADULTS XL</option>
-                                    <option value="ADULTS 2XL">ADULTS 2XL</option>
-                                    <option value="ADULTS 3XL">ADULTS 3XL</option>
-                                    <option value="ADULTS 4XL">ADULTS 4XL</option>
-                                    <option value="ADULTS 5XL">ADULTS 5XL</option>
-                                    <option value="ADULTS 6XL">ADULTS 6XL</option>
-                                    <option value="ADULTS 7XL">ADULTS 7XL</option>
+                                <optgroup label="ADULTS (WOMEN'S POLO)" class="text-[#002D62]">
+                                    <option value="2XS-6">2XS(6)</option>
+                                    <option value="XS-8">XS(8)</option>
+                                    <option value="S-10">S(10)</option>
+                                    <option value="M-12">M(12)</option>
+                                    <option value="L-14">L(14)</option>
+                                    <option value="XL-16">XL(16)</option>
+                                    <option value="XL-18">2XL(18)</option>
+                                    <option value="XL-20">3XL(20)</option>
+                                    <option value="XL-22">4XL(22)</option>
+                                    <option value="XL-24">5XL(24)</option>
+                                    <option value="XL-26">6XL(26)</option>
+                                    <option value="XL-28">7XL(28)</option>
                                 </optgroup>
                             <?php elseif($product->size_chart === 'transition_warmup_tee'): ?>
                                 <optgroup label="KIDS (STANDARD LENGTH)" class="text-[#002D62]">
@@ -522,7 +573,7 @@
                 <?php endif; ?>
                 <!-- Order Count -->
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center w-20 lg:w-30 border border-[#002d62] bg-white border-2 ">
+                    <div class="flex items-center justify-between w-20 lg:w-[100px] border border-[#002d62] bg-white border-2 ">
                         <button onclick="decreaseCount()" class="px-2  text-[#002D62] text-xs lg:text-lg">-</button>
                         <span id="orderCount" class="px-2 text-lg text-[#002D62] font-bold text-xs lg:text-lg">1</span>
                         <button onclick="increaseCount()" class="px-2  text-[#002D62] text-xs lg:text-lg ">+</button>
@@ -534,7 +585,7 @@
                 
                 
                 <div class="flex flex-col mt-1">
-                    <button onclick="addToCart()"
+                    <button onclick="addToCart('<?php echo e($product->name); ?>', <?php echo e($product->price); ?>, '<?php echo e($image); ?>')"
                         class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-50 lg:w-70">
                         ADD TO CART
                     </button>
@@ -622,7 +673,11 @@
 
 </script>
     <script>
-        function addToCart() {
+        function generateUniqueId() {
+            return 'id-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        }
+
+        function addToCart(productName, productPrice, imagePath) {
             let count = parseInt(document.getElementById("orderCount").innerText) || 1;
             let sizeSelect = document.getElementById("size");
             let productEnd = "<?php echo e($product->productEnd); ?>"; 
@@ -638,29 +693,16 @@
             }
 
             let product = {
-                id: "<?php echo e($product->id); ?>", 
-                name: "<?php echo e($product->name); ?>",
-                price: "<?php echo e($product->price); ?>",
-                image: "<?php echo e($imagePath); ?>",
+                id: generateUniqueId(), // ✅ Generates a unique ID for every cart addition
+                name: productName, 
+                price: productPrice, 
+                image: imagePath, 
                 quantity: count,
                 size: sizeSelect ? sizeSelect.value : null,
                 color: null,
                 custom_name: null,
                 custom_number: null,
             };
-
-            if (sizeSelect) {
-                sizeSelect.addEventListener("change", function () {
-                    product.size = this.value;
-                    console.log("Selected Size:", product.size);
-                });
-            }
-
-            // Check if product name contains "polo" and get the selected size
-            if (product.name.toLowerCase().includes("polo")) {
-                let sizeElement = document.getElementById("size");
-                product.size = sizeElement ? sizeElement.value : null;
-            }
 
             // Get custom name and number using their IDs
             let customNameInput = document.getElementById("custom_name");
@@ -670,19 +712,9 @@
 
             // Retrieve cart from localStorage
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            let existingProductIndex = cart.findIndex(
-                item => item.id === product.id && 
-                        item.size === product.size && 
-                        item.color === product.color &&
-                        item.customName === product.customName &&
-                        item.customNumber === product.customNumber
-            );
-
-            if (existingProductIndex !== -1) {
-                cart[existingProductIndex].quantity += product.quantity;
-            } else {
-                cart.push(product);
-            }
+            
+            // Push the product to the cart (Each item will always have a unique ID)
+            cart.push(product);
 
             // Save updated cart to localStorage
             localStorage.setItem("cart", JSON.stringify(cart));
@@ -690,28 +722,11 @@
             console.log("Added to cart:", product);
             console.log("Updated cart:", cart);
 
-            // Send data to the server
-            fetch('/cart/add', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify(product)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => console.log('Server response:', data))
-            .catch(error => console.error('Error:', error));
-
-
-           showNotification();
-          
+            showNotification();
         }
+
+
+
 
         // Quantity Management
         function decreaseCount() {
@@ -730,38 +745,47 @@
     </script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let sliders = document.querySelectorAll("[id^='slider-']");
-
-        sliders.forEach(slider => {
-            let productId = slider.id.replace('slider-', '');
-            window["currentSlide_" + productId] = 0;
-            let totalSlides = slider.children.length;
-
-            // Auto-slide every 3 seconds
-            setInterval(() => {
-                nextSlide(productId);
-            }, 3000);
-        });
-    });
-
     function nextSlide(productId) {
-        let slider = document.getElementById("slider-" + productId);
-        let slides = slider.children;
-        let totalSlides = slides.length;
+        let slider = document.getElementById(`slider-${productId}`);
+        let firstImage = slider.firstElementChild;
 
-        window["currentSlide_" + productId] = (window["currentSlide_" + productId] + 1) % totalSlides;
-        slider.style.transform = `translateX(-${window["currentSlide_" + productId] * 100}%)`;
+        // Slide left
+        slider.style.transition = "transform 0.7s ease-in-out";
+        slider.style.transform = "translateX(-100%)";
+
+        setTimeout(() => {
+            slider.appendChild(firstImage); // Move first image to the end
+            slider.style.transition = "none"; // Remove transition for instant shift
+            slider.style.transform = "translateX(0)"; // Reset position
+        }, 700); // Matches transition duration
     }
 
     function prevSlide(productId) {
-        let slider = document.getElementById("slider-" + productId);
-        let slides = slider.children;
-        let totalSlides = slides.length;
+        let slider = document.getElementById(`slider-${productId}`);
+        let lastImage = slider.lastElementChild;
 
-        window["currentSlide_" + productId] = (window["currentSlide_" + productId] - 1 + totalSlides) % totalSlides;
-        slider.style.transform = `translateX(-${window["currentSlide_" + productId] * 100}%)`;
+        // Move last image to the front instantly
+        slider.insertBefore(lastImage, slider.firstElementChild);
+        slider.style.transition = "none"; // Disable transition for instant shift
+        slider.style.transform = "translateX(-100%)"; // Shift slider left instantly
+
+        setTimeout(() => {
+            // Animate slide back to original position
+            slider.style.transition = "transform 0.7s ease-in-out";
+            slider.style.transform = "translateX(0)";
+        }, 10); // Small delay to allow instant repositioning
     }
+
+    // Auto-slide every 7 seconds
+    function autoSlide(productId) {
+        setInterval(() => {
+            nextSlide(productId);
+        }, 7000); // 7 seconds interval
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        autoSlide("<?php echo e($product->id); ?>");
+    });
 </script>
 <script>
     function toggleSizeChart(sizeChart = null) {
