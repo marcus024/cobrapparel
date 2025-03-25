@@ -812,6 +812,18 @@
             slider.style.transform = "translateX(0)";
         }, 10); // Small delay to allow instant repositioning
     }
+
+    // Auto-slide every 7 seconds
+    function autoSlide(productId) {
+        setInterval(() => {
+            nextSlide(productId);
+        }, 7000); // 7 seconds interval
+    }
+
+    // Start auto-slide when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        autoSlide("{{ $product->id }}");
+    });
 </script>
 <script>
     function toggleSizeChart(sizeChart = null) {
