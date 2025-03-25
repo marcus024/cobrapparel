@@ -57,8 +57,6 @@
                     <input type="number" id="productStock" class="border p-2 w-full" placeholder="Stock Quantity">
                 </div>
             </div>
-
-            <!-- Size Chart Selection -->
             <div class="grid grid-cols-2 gap-3 mt-3">
                 <div class="flex items-center">
                     <input type="checkbox" id="sizeChartToggle" class="mr-2" onchange="toggleSizeChart()">
@@ -76,20 +74,17 @@
                 <option value="dipsas_standard_polo">Dipsas Standard Polo</option>
                 <option value="dipsas_trade_polo">Dipsas Trade Polo</option>
                 <option value="dipsas_warmup_tee">Dipsas Warm Up Tee</option>
+                <option value="dipsas_warmup_tee_long">Dipsas Warm Up Tee Long Sleeve</option>
                 <option value="dipsas_hoodie">Dipsas Hoodie</option>
                 <option value="dipsas_netball_dress">Dipsas Netball Dress</option>
                 <option value="dipsas_quarter_zip">Dipsas Quarter Zip</option>
-                
                 <option value="dipsas_women_short">Dipsas Women Short</option>
                 <option value="dipsas_women_polo">Dipsas Women Polo</option>
-                <option value="dipsas_women_singlet">Dipsas Women Singlet</option>
                 <option value="dipsas_spray_jacket">Dipsas Spray Jacket</option>
-
                 <option value="truckers">Truckers</option>
                 <option value="beanies">Beanies</option>
-
-                 <option value="socks">Socks</option>
-                    <option value="men_short">Men Short</option>
+                <option value="socks">Socks</option>
+                <option value="men_short">Men Short</option>
             </select>
         </div>
 

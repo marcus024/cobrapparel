@@ -83,17 +83,15 @@
         <h2 id="form-title">Login</h2>
         <?php if(session('success')): ?> <p style="color: green;"><?php echo e(session('success')); ?></p> <?php endif; ?>
         <?php if($errors->any()): ?> <p style="color: red;"><?php echo e($errors->first()); ?></p> <?php endif; ?>
-        <form method="POST" action="<?php echo e(route('register.post')); ?>">
+        <form method="POST" action="<?php echo e(route('login.post')); ?>">
             <?php echo csrf_field(); ?>
-            <input type="text" name="name" id="email" placeholder="Name" required>
             <input type="email" name="email" id="email" placeholder="Email" required>
             <div class="relative w-full">
                 <input type="password" id="password" name="password" placeholder="Password" required 
                     class="border p-2 rounded w-full pr-10">
                 
                 <!-- Show/Hide Password Icon -->
-                <img src="images/icons/show_pass.png" id="togglePassword" 
-                    class="absolute right-3 top-1/2 transform -translate-y-1/2 h-6 w-6 cursor-pointer">
+                
             </div>
             <button type="submit">Login</button>
         </form>
