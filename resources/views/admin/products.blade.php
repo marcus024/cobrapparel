@@ -82,7 +82,6 @@
                 
                 <option value="dipsas_women_short">Dipsas Women Short</option>
                 <option value="dipsas_women_polo">Dipsas Women Polo</option>
-                <option value="dipsas_women_singlet">Dipsas Women Singlet</option>
                 <option value="dipsas_spray_jacket">Dipsas Spray Jacket</option>
 
                 <option value="truckers">Truckers</option>
