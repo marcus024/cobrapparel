@@ -77,12 +77,12 @@ class ConfirmController extends Controller
         ]);
 
         $orderItems = [];
+        $shopId = null;
 
         // Insert products into order_items table
         foreach ($validatedData['cart'] as $product) {
             $orderItems[] = OrderItem::create([
                 'order_id' => uniqid(),
-             
                 'order_unique' => $order->order_id,
                 'product_name' => $product['name'],
                 'quantity' => $product['quantity'],
@@ -91,10 +91,21 @@ class ConfirmController extends Controller
                 'custom_name' => $product['custom_name'] ?? null,
                 'custom_number' => $product['custom_number'] ?? null,
             ]);
+
+            if (isset($product['shop_id']) && !$shopId) {
+                $shopId = $product['shop_id'];
+            }
         }
 
         // Send Email Notification to Customer
         Mail::to($validatedData['email'])->send(new OrderConfirmationMail($order, $orderItems));
+
+        if ($shopId) {
+            $shop = \App\Models\Shop::find($shopId);
+            if ($shop && $shop->emailAddress) {
+                Mail::to($shop->emailAddress)->send(new ShopOwnerNotificationMail($order, $orderItems, $shop));
+            }
+        }
 
         // Send Email Notification to Shop Owner
         $shopOwnerEmail = "suppliers@cobrapparel.com"; 

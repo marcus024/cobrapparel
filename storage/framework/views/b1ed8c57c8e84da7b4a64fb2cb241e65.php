@@ -585,7 +585,8 @@
                 
                 
                 <div class="flex flex-col mt-1">
-                    <button onclick="addToCart('<?php echo e($product->name); ?>', <?php echo e($product->price); ?>, '<?php echo e($image); ?>')"
+                    <button onclick='addToCart("<?php echo e($product->name); ?>", <?php echo e($product->price); ?>, "<?php echo e($image); ?>")'
+                    
                         class="ml-5 bg-btn align-self-start bg-[#002d62] text-white font-bold py-1 px-2 text-xs lg:text-lg w-50 lg:w-70">
                         ADD TO CART
                     </button>
@@ -681,6 +682,7 @@
             let count = parseInt(document.getElementById("orderCount").innerText) || 1;
             let sizeSelect = document.getElementById("size");
             let productEnd = "<?php echo e($product->productEnd); ?>"; 
+            let shopId = "<?php echo e($product->shop->id); ?>";
             let currentDate = new Date().toISOString().split("T")[0];
 
             let alertMessage = document.getElementById("productAlert");
@@ -702,6 +704,7 @@
                 color: null,
                 custom_name: null,
                 custom_number: null,
+                shop_id: shopId,
             };
 
             // Get custom name and number using their IDs
@@ -724,9 +727,6 @@
 
             showNotification();
         }
-
-
-
 
         // Quantity Management
         function decreaseCount() {
