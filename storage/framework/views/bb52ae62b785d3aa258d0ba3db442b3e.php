@@ -9,34 +9,47 @@
         <div class="bg-gray-200 text-white p-4 rounded-lg shadow-md">
             <h2 class="text-[#700101] text-xl font-bold">Live Products Today</h2>
             <div class="flex lg:flex-col w-auto mt-2 justify-between">
-                <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
-                        Barellan
-                    </p>
-                    <p class="text-black font-bold text-lg">
-                        13
-                    </p>
-                </div>
-                <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
-                        Hockey
-                    </p>
-                    <p class="text-black font-bold text-lg">
-                        20
-                    </p>
-                </div>
+                <?php
+                    $shops = DB::table('shops')
+                        ->select('shops.id', 'shops.name', 
+                            DB::raw('(SELECT COUNT(*) FROM products 
+                                    WHERE products.shop_id = shops.id 
+                                    AND products.productEnd > CURDATE()) as active_products_count')
+                        )
+                        ->get();
+                ?>
+                <?php $__currentLoopData = $shops; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shop): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="flex lg:flex-row w-auto mt-2 justify-between">
+                        <p class="text-black font-medium text-lg">
+                            <?php echo e($shop->name); ?>
+
+                        </p>
+                        <p class="text-black font-bold text-lg">
+                            <?php echo e($shop->active_products_count); ?>
+
+                        </p>
+                    </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
        
        <div class="bg-gray-200 text-white p-4 rounded-lg shadow-md">
             <h2 class="text-[#700101] text-xl font-bold">Order Status Today</h2>
             <div class="flex lg:flex-col w-auto mt-2 justify-between">
+                <?php
+                    $statusCounts = DB::table('orders')
+                        ->select('status', DB::raw('COUNT(*) as count'))
+                        ->whereIn('status', ['Pending', 'In Production', 'Completed'])
+                        ->groupBy('status')
+                        ->pluck('count', 'status');
+                ?>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
                     <p class="text-black font-medium text-lg">
                         Pending
                     </p>
                     <p class="text-black font-bold text-lg">
-                        30
+                        <?php echo e($statusCounts['Pending'] ?? 0); ?>
+
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
@@ -44,7 +57,8 @@
                         In Production
                     </p>
                     <p class="text-black font-bold text-lg">
-                        27
+                        <?php echo e($statusCounts['In Production'] ?? 0); ?>
+
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
@@ -52,7 +66,8 @@
                         Completed
                     </p>
                     <p class="text-black font-bold text-lg">
-                        201
+                        <?php echo e($statusCounts['Completed'] ?? 0); ?>
+
                     </p>
                 </div>
             </div>

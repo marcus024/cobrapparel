@@ -131,7 +131,7 @@ public function store(Request $request)
         }
 
         $request->validate([
-            'status' => 'required|string|in:Pending,Processing,Shipped,Delivered,Canceled',
+            'status' => 'required|string|in:Paid,Pending,In Production,Completed',
         ]);
 
         // $order->update(['status' => $request->status]);

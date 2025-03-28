@@ -18,7 +18,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('admin.admin')->with('success', 'Logged in successfully!');
+            return redirect()->route('admin.dashboard')->with('success', 'Logged in successfully!');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials']);
