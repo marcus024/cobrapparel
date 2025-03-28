@@ -85,8 +85,10 @@
         @if ($errors->any()) <p style="color: red;">{{ $errors->first() }}</p> @endif
         <form method="POST" action="{{ route('login.post') }}">
             @csrf
+            {{-- <input type="text" name="name" id="name" placeholder="Name" required> --}}
             <input type="email" name="email" id="email" placeholder="Email" required>
             <div class="relative w-full">
+
                 <input type="password" id="password" name="password" placeholder="Password" required 
                     class="border p-2 rounded w-full pr-10">
                 

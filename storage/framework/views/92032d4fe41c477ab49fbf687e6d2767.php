@@ -85,8 +85,10 @@
         <?php if($errors->any()): ?> <p style="color: red;"><?php echo e($errors->first()); ?></p> <?php endif; ?>
         <form method="POST" action="<?php echo e(route('login.post')); ?>">
             <?php echo csrf_field(); ?>
+            
             <input type="email" name="email" id="email" placeholder="Email" required>
             <div class="relative w-full">
+
                 <input type="password" id="password" name="password" placeholder="Password" required 
                     class="border p-2 rounded w-full pr-10">
                 

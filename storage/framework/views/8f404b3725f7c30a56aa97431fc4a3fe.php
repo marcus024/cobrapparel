@@ -94,10 +94,9 @@
         <p><strong>Status:</strong> 
             <select id="modalStatus" class="border border-gray-300 p-2 rounded">
                 <option value="Pending">Pending</option>
-                <option value="Processing">Processing</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Canceled">Canceled</option>
+                <option value="Paid">Paid</option>
+                <option value="In Production">In Production</option>
+                <option value="Completed">Completed</option>
             </select>
         </p>
         <p><strong>Order Date:</strong> <span id="modalDate"></span></p>
