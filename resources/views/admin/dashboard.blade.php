@@ -21,10 +21,10 @@
                 @endphp
                 @foreach($shops as $shop)
                     <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                        <p class="text-black font-medium text-lg">
+                        <p class="text-black font-medium text-xm lg:mr-5">
                             {{ $shop->name }}
                         </p>
-                        <p class="text-black font-bold text-lg">
+                        <p class="text-black font-bold text-xm">
                             {{ $shop->active_products_count }}
                         </p>
                     </div>
@@ -43,26 +43,26 @@
                         ->pluck('count', 'status');
                 @endphp
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-xm lg:mr-5">
                         Pending
                     </p>
-                    <p class="text-black font-bold text-lg">
+                    <p class="text-black font-bold text-xm">
                         {{ $statusCounts['Pending'] ?? 0 }}
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-xm lg:mr-5">
                         In Production
                     </p>
-                    <p class="text-black font-bold text-lg">
+                    <p class="text-black font-bold text-xm">
                         {{ $statusCounts['In Production'] ?? 0 }}
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-xm lg:mr-5">
                         Completed
                     </p>
-                    <p class="text-black font-bold text-lg">
+                    <p class="text-black font-bold text-xm">
                         {{ $statusCounts['Completed'] ?? 0 }}
                     </p>
                 </div>

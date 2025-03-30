@@ -21,11 +21,11 @@
                 ?>
                 <?php $__currentLoopData = $shops; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shop): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                        <p class="text-black font-medium text-lg">
+                        <p class="text-black font-medium text-xm lg:mr-5">
                             <?php echo e($shop->name); ?>
 
                         </p>
-                        <p class="text-black font-bold text-lg">
+                        <p class="text-black font-bold text-xm">
                             <?php echo e($shop->active_products_count); ?>
 
                         </p>
@@ -45,28 +45,28 @@
                         ->pluck('count', 'status');
                 ?>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-xm lg:mr-5">
                         Pending
                     </p>
-                    <p class="text-black font-bold text-lg">
+                    <p class="text-black font-bold text-xm">
                         <?php echo e($statusCounts['Pending'] ?? 0); ?>
 
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-xm lg:mr-5">
                         In Production
                     </p>
-                    <p class="text-black font-bold text-lg">
+                    <p class="text-black font-bold text-xm">
                         <?php echo e($statusCounts['In Production'] ?? 0); ?>
 
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-xm lg:mr-5">
                         Completed
                     </p>
-                    <p class="text-black font-bold text-lg">
+                    <p class="text-black font-bold text-xm">
                         <?php echo e($statusCounts['Completed'] ?? 0); ?>
 
                     </p>
