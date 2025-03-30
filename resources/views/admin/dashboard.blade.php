@@ -89,7 +89,7 @@
 
             $totalRevenue = $shopRevenues->sum('revenue');
         @endphp
-        <div class="bg-gray-200 lg:w-[50%] text-white px-0 pt-0 rounded-lg lg:ml-4 shadow-md">
+        <div class="bg-gray-200 lg:w-[40%] text-white px-0 pt-0 rounded-lg lg:ml-4 shadow-md">
             <div class="relative w-full h-10 bg-[#700101] flex lg:flex-row justify-between items-center p-3 rounded-t-lg">
                 <h2 class="text-white text-xl font-bold">Club Revenue</h2>
                 <form method="GET" action="" id="dateForm" class="flex lg:flex-row items-center gap-2">
@@ -158,7 +158,7 @@
         @endphp
         <div class="bg-gray-200 text-white rounded-lg shadow-md">
             <div class="relative w-full h-10 bg-gray-300 flex lg:flex-row justify-between items-center p-3 rounded-t-lg">
-                <h2 class="text-black text-xl font-bold">{{ $orderItems->first()->name ?? 'Shop' }}</h2>
+                <h2 class="text-black text-xm font-bold">{{ $orderItems->first()->name ?? 'Shop' }}</h2>
                 <form method="GET" action="" id="shopDateForm" class="flex lg:flex-row items-center gap-2">
                     <label class="text-black text-[8px]">From:</label>
                     <input 
