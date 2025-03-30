@@ -144,9 +144,9 @@
     </div>
     
     
-    <div class="grid grid-cols-2 gap-4 mt-4">
+    <div class="grid grid-rows-2 gap-4 mt-4">
         
-        <?php
+       <?php
             use Illuminate\Support\Facades\DB;
             use Illuminate\Support\Carbon;
 
@@ -154,69 +154,74 @@
             $startDate = request('start_date', Carbon::now()->startOfMonth()->toDateString());
             $endDate = request('end_date', Carbon::now()->endOfMonth()->toDateString());
 
-            // Fetch filtered order items
+            // Fetch order items grouped by shop
             $orderItems = DB::table('order_items')
                 ->join('shops', 'order_items.shop_id', '=', 'shops.id')
-                ->select('order_items.quantity', 'order_items.product_name', 'order_items.price', 'order_items.created_at', 'shops.name')
+                ->select('order_items.shop_id', 'order_items.quantity', 'order_items.product_name', 'order_items.price', 'order_items.created_at', 'shops.name')
                 ->whereBetween('order_items.created_at', [$startDate, $endDate])
-                ->get();
-
-            // Calculate total revenue
-            $totalRevenue = $orderItems->sum(fn($item) => $item->quantity * $item->price);
+                ->get()
+                ->groupBy('shop_id'); // Group data by shop_id
         ?>
-        <div class="bg-gray-200 text-white rounded-lg shadow-md lg:w-[600px]">
-            <div class="relative w-full h-15 bg-gray-300 flex lg:flex-row justify-between items-center p-3 rounded-t-lg">
-                <h2 class="text-black text-xm text-center font-bold"><?php echo e($orderItems->first()->name ?? 'Shop'); ?></h2>
-                <form method="GET" action="" id="shopDateForm" class="flex lg:flex-row items-center gap-2">
-                    <label class="text-black text-[8px]">From:</label>
-                    <input 
-                        type="date" 
-                        name="start_date" 
-                        value="<?php echo e($startDate); ?>" 
-                        class="bg-transparent text-black text-[12px] lg:h-6 lg:w-24 border border-black rounded px-1"
-                    >
-                    <label class="text-black text-[8px]">To:</label>
-                    <input 
-                        type="date" 
-                        name="end_date" 
-                        value="<?php echo e($endDate); ?>" 
-                        class="bg-transparent text-black text-[12px] lg:h-6 lg:w-24 border border-black rounded px-1"
-                    >
-                    <button type="submit" class="bg-transparent text-black text-[12px] border border-black rounded px-2 lg:h-6">
-                        Filter
-                    </button>
-                </form>
-            </div>
-            <div class="flex lg:flex-col w-auto mt-2 py-2 px-4 justify-between">
-               <div class="lg:w-auto max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300 pr-2">
-                    <?php $__currentLoopData = $orderItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                            <p class="text-black font-semibold text-lg">
-                                <?php echo e($item->quantity); ?>
+        <?php $__currentLoopData = $orderItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shopId => $items): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php
+                $shopName = $items->first()->name;
+                $totalRevenue = $items->sum(fn($item) => $item->quantity * $item->price);
+            ?>
 
-                            </p>
-                            <p class="text-black font-medium text-lg">
-                                <?php echo e($item->product_name); ?>
-
-                            </p>
-                            <p class="text-black font-bold text-lg">
-                                $<?php echo e(number_format($item->quantity * $item->price, 2)); ?>
-
-                            </p>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <div class="bg-gray-200 text-white rounded-lg shadow-md lg:w-[600px] mb-5">
+                <div class="relative w-full h-15 bg-gray-300 flex lg:flex-row justify-between items-center p-3 rounded-t-lg">
+                    <h2 class="text-black text-xm text-center font-bold"><?php echo e($shopName); ?></h2>
+                    <form method="GET" action="" id="shopDateForm" class="flex lg:flex-row items-center gap-2">
+                        <label class="text-black text-[8px]">From:</label>
+                        <input 
+                            type="date" 
+                            name="start_date" 
+                            value="<?php echo e($startDate); ?>" 
+                            class="bg-transparent text-black text-[12px] lg:h-6 lg:w-24 border border-black rounded px-1"
+                        >
+                        <label class="text-black text-[8px]">To:</label>
+                        <input 
+                            type="date" 
+                            name="end_date" 
+                            value="<?php echo e($endDate); ?>" 
+                            class="bg-transparent text-black text-[12px] lg:h-6 lg:w-24 border border-black rounded px-1"
+                        >
+                        <button type="submit" class="bg-transparent text-black text-[12px] border border-black rounded px-2 lg:h-6">
+                            Filter
+                        </button>
+                    </form>
                 </div>
-                <div class="flex lg:flex-row w-auto mt-6 justify-between">
-                    <p class="text-black font-semibold text-xl">
-                        Total
-                    </p>
-                    <p class="text-black font-bold text-lg">
-                        $<?php echo e(number_format($totalRevenue, 2)); ?>
+                <div class="flex lg:flex-col w-auto mt-2 py-2 px-4 justify-between">
+                    <div class="lg:w-auto max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300 pr-2">
+                        <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="flex lg:flex-row w-auto mt-2 justify-between">
+                                <p class="text-black font-semibold text-lg">
+                                    <?php echo e($item->quantity); ?>
 
-                    </p>
+                                </p>
+                                <p class="text-black font-medium text-lg">
+                                    <?php echo e($item->product_name); ?>
+
+                                </p>
+                                <p class="text-black font-bold text-lg">
+                                    $<?php echo e(number_format($item->quantity * $item->price, 2)); ?>
+
+                                </p>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                    <div class="flex lg:flex-row w-auto mt-6 justify-between">
+                        <p class="text-black font-semibold text-xl">
+                            Total
+                        </p>
+                        <p class="text-black font-bold text-lg">
+                            $<?php echo e(number_format($totalRevenue, 2)); ?>
+
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 </div>
 <?php $__env->stopSection(); ?>
