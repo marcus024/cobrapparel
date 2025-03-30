@@ -119,7 +119,7 @@
                         {{ $shop->name }}
                     </p>
                     <p class="text-black font-bold text-lg">
-                        {{ number_format($shop->revenue) }}
+                        ${{ number_format($shop->revenue) }}
                     </p>
                 </div>
                 @endforeach
@@ -128,7 +128,7 @@
                         Total
                     </p>
                     <p class="text-black font-bold text-lg">
-                        {{ number_format($totalRevenue) }}
+                        ${{ number_format($totalRevenue) }}
                     </p>
                 </div>
             </div>
