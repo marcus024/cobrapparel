@@ -8,7 +8,7 @@
     <div class="grid grid-cols-2 gap-4 mt-4">
         {{-- Products --}}
         <div class="bg-gray-200 text-white p-4 rounded-lg shadow-md">
-            <h2 class="text-[#700101] text-xl font-bold">Live Products Today</h2>
+            <h2 class="text-[#700101] text-lg font-bold">Live Products Today</h2>
             <div class="flex lg:flex-col w-auto mt-2 justify-between">
                 @php
                     $shops = DB::table('shops')
@@ -33,7 +33,7 @@
         </div>
        {{-- Status --}}
        <div class="bg-gray-200 text-white p-4 rounded-lg shadow-md">
-            <h2 class="text-[#700101] text-xl font-bold">Order Status Today</h2>
+            <h2 class="text-[#700101] text-lg font-bold">Order Status Today</h2>
             <div class="flex lg:flex-col w-auto mt-2 justify-between">
                 @php
                     $statusCounts = DB::table('orders')
@@ -89,7 +89,7 @@
 
             $totalRevenue = $shopRevenues->sum('revenue');
         @endphp
-        <div class="bg-gray-200 lg:w-[45%] text-white px-0 pt-0 rounded-lg lg:ml-4 shadow-md">
+        <div class="bg-gray-200 lg:w-[50%] text-white px-0 pt-0 rounded-lg lg:ml-4 shadow-md">
             <div class="relative w-full h-10 bg-[#700101] flex lg:flex-row justify-between items-center p-3 rounded-t-lg">
                 <h2 class="text-white text-xl font-bold">Club Revenue</h2>
                 <form method="GET" action="" id="dateForm" class="flex lg:flex-row items-center gap-2">
@@ -156,9 +156,9 @@
             // Calculate total revenue
             $totalRevenue = $orderItems->sum(fn($item) => $item->quantity * $item->price);
         @endphp
-        <div class="bg-gray-200 text-white rounded-lg shadow-md">
-            <div class="relative w-full h-10 bg-gray-300 flex lg:flex-row justify-between items-center p-3 rounded-t-lg">
-                <h2 class="text-black text-xm font-bold">{{ $orderItems->first()->name ?? 'Shop' }}</h2>
+        <div class="bg-gray-200 text-white rounded-lg shadow-md lg:w-[600px]">
+            <div class="relative w-full h-15 bg-gray-300 flex lg:flex-row justify-between items-center p-3 rounded-t-lg">
+                <h2 class="text-black text-xm text-center font-bold">{{ $orderItems->first()->name ?? 'Shop' }}</h2>
                 <form method="GET" action="" id="shopDateForm" class="flex lg:flex-row items-center gap-2">
                     <label class="text-black text-[8px]">From:</label>
                     <input 
