@@ -125,7 +125,7 @@
 
                     </p>
                     <p class="text-black font-bold text-lg">
-                        <?php echo e(number_format($shop->revenue)); ?>
+                        $<?php echo e(number_format($shop->revenue)); ?>
 
                     </p>
                 </div>
@@ -135,7 +135,7 @@
                         Total
                     </p>
                     <p class="text-black font-bold text-lg">
-                        <?php echo e(number_format($totalRevenue)); ?>
+                        $<?php echo e(number_format($totalRevenue)); ?>
 
                     </p>
                 </div>
