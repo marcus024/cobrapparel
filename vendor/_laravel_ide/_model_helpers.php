@@ -579,10 +579,12 @@ namespace App\Models {
      * @property string $product_name
      * @property string|null $reference_code
      * @property string $order_unique
+     * @property mixed $shop_id
      * @property int $id
      * @property-read \App\Models\Order $order
      * @property-read \App\Models\Product $product
      * @method static \Illuminate\Database\Eloquent\Builder<OrderItem>|OrderItem whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<OrderItem>|OrderItem whereShopId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<OrderItem>|OrderItem whereOrderUnique($value)
      * @method static \Illuminate\Database\Eloquent\Builder<OrderItem>|OrderItem whereReferenceCode($value)
      * @method static \Illuminate\Database\Eloquent\Builder<OrderItem>|OrderItem whereProductName($value)

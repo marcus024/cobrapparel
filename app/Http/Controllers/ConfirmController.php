@@ -87,6 +87,7 @@ class ConfirmController extends Controller
                 'product_name' => $product['name'],
                 'quantity' => $product['quantity'],
                 'price' => $product['price'],
+                'shop_id' => $product['shop_id'],
                 'size' => $product['size'] ?? null,
                 'custom_name' => $product['custom_name'] ?? null,
                 'custom_number' => $product['custom_number'] ?? null,
