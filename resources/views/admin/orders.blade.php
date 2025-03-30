@@ -52,7 +52,6 @@
                             $product = \App\Models\Product::where('name', $item->product_name)->first();
                             $shopName = $product ? optional($product->shop)->name : 'N/A';
                         @endphp
-
                         <tr>
                             <td class="border border-gray-300 p-2">{{ $order->order_id }}</td>
                             <td class="border border-gray-300 p-2">{{ $order->created_at->format('Y-m-d') }}</td>
