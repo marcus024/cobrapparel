@@ -21,7 +21,7 @@
                 @endphp
                 @foreach($shops as $shop)
                     <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                        <p class="text-black font-medium text-lg">
+                        <p class="text-black font-medium text-lg lg:mr-5">
                             {{ $shop->name }}
                         </p>
                         <p class="text-black font-bold text-lg">
@@ -43,7 +43,7 @@
                         ->pluck('count', 'status');
                 @endphp
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-lg lg:mr-5">
                         Pending
                     </p>
                     <p class="text-black font-bold text-lg">
@@ -51,7 +51,7 @@
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-lg lg:mr-5">
                         In Production
                     </p>
                     <p class="text-black font-bold text-lg">
@@ -59,7 +59,7 @@
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-lg lg:mr-5">
                         Completed
                     </p>
                     <p class="text-black font-bold text-lg">

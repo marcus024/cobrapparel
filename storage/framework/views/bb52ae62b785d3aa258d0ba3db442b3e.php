@@ -21,7 +21,7 @@
                 ?>
                 <?php $__currentLoopData = $shops; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shop): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                        <p class="text-black font-medium text-lg">
+                        <p class="text-black font-medium text-lg lg:mr-5">
                             <?php echo e($shop->name); ?>
 
                         </p>
@@ -45,7 +45,7 @@
                         ->pluck('count', 'status');
                 ?>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-lg lg:mr-5">
                         Pending
                     </p>
                     <p class="text-black font-bold text-lg">
@@ -54,7 +54,7 @@
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-lg lg:mr-5">
                         In Production
                     </p>
                     <p class="text-black font-bold text-lg">
@@ -63,7 +63,7 @@
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
-                    <p class="text-black font-medium text-lg">
+                    <p class="text-black font-medium text-lg lg:mr-5">
                         Completed
                     </p>
                     <p class="text-black font-bold text-lg">
