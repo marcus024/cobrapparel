@@ -77,34 +77,37 @@ class ConfirmController extends Controller
         ]);
 
         $orderItems = [];
-        $shopId = null;
+        $shopIdSet = null; // Define variable before usage
 
         // Insert products into order_items table
         foreach ($validatedData['cart'] as $product) {
+            $shopId = $product['shop_id'] ?? null; // Assign shop_id safely
+
             $orderItems[] = OrderItem::create([
                 'order_id' => uniqid(),
                 'order_unique' => $order->order_id,
                 'product_name' => $product['name'],
                 'quantity' => $product['quantity'],
                 'price' => $product['price'],
-                'shop_id' => $product['shop_id'],
+                'shop_id' => $shopId,
                 'size' => $product['size'] ?? null,
                 'custom_name' => $product['custom_name'] ?? null,
                 'custom_number' => $product['custom_number'] ?? null,
             ]);
 
-            if (isset($product['shop_id']) && !$shopId) {
-                $shopId = $product['shop_id'];
+            // Assign only if it's not null and hasn't been set yet
+            if ($shopId !== null && $shopIdSet === null) {
+                $shopIdSet = $shopId;
             }
         }
 
         // Send Email Notification to Customer
         Mail::to($validatedData['email'])->send(new OrderConfirmationMail($order, $orderItems));
 
-        if ($shopId) {
-            $shop = \App\Models\Shop::find($shopId);
-            if ($shop && $shop->emailAddress) {
-                Mail::to($shop->emailAddress)->send(new ShopOwnerNotificationMail($order, $orderItems, $shop));
+        if ($shopIdSet !== null) {  // Ensure shopIdSet is valid before querying
+            $shop = \App\Models\Shop::find($shopIdSet);
+            if ($shop && !empty($shop->emailAddress)) {
+                Mail::to($shop->emailAddress)->send(new ShopOwnerNotificationMail($order, $orderItems));
             }
         }
 
