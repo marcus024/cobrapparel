@@ -38,7 +38,7 @@
                 @php
                     $statusCounts = DB::table('orders')
                         ->select('status', DB::raw('COUNT(*) as count'))
-                        ->whereIn('status', ['Pending', 'In Production', 'Completed'])
+                        ->whereIn('status', ['Paid', 'In Production', 'Completed'])
                         ->groupBy('status')
                         ->pluck('count', 'status');
                 @endphp
