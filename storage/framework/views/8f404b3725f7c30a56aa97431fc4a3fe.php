@@ -32,6 +32,7 @@
                     <th class="border border-gray-300 p-2">State</th>
                     <th class="border border-gray-300 p-2">Postcode</th>
                     <th class="border border-gray-300 p-2">Status</th>
+                    <th class="border border-gray-300 p-2">Reference Code</th>
                     <th class="border border-gray-300 p-2">Product Name</th>
                     <th class="border border-gray-300 p-2">Quantity</th>
                     <th class="border border-gray-300 p-2">Price</th>
@@ -64,6 +65,7 @@
                             <td class="border border-gray-300 p-2"><?php echo e($order->state); ?></td>
                             <td class="border border-gray-300 p-2"><?php echo e($order->postcode); ?></td>
                             <td class="border border-gray-300 p-2"><?php echo e($order->status); ?></td>
+                            <td class="border border-gray-300 p-2"><?php echo e($order->reference_code); ?></td>
                             
                              <!-- Shop Name Column -->
                             <td class="border border-gray-300 p-2"><?php echo e($item->product_name); ?></td>
