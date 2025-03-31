@@ -44,10 +44,10 @@
                 @endphp
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
                     <p class="text-black font-medium text-xm lg:mr-5">
-                        Pending
+                        Paid
                     </p>
                     <p class="text-black font-bold text-xm">
-                        {{ $statusCounts['Pending'] ?? 0 }}
+                        {{ $statusCounts['Paid'] ?? 0 }}
                     </p>
                 </div>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
