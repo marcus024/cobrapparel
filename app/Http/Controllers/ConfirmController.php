@@ -75,7 +75,7 @@ class ConfirmController extends Controller
             'reference_code' => $referenceCode,
             'status' => 'Paid',
         ]);
-        
+
         $orderItems = [];
         $shopIdSet = null; // Define variable before usage
 
@@ -107,7 +107,7 @@ class ConfirmController extends Controller
         if ($shopIdSet !== null) {  // Ensure shopIdSet is valid before querying
             $shop = \App\Models\Shop::find($shopIdSet);
             if ($shop && !empty($shop->emailAddress)) {
-                Mail::to($shop->emailAddress)->send(new ShopOwnerNotificationMail($order, $orderItems, $shop));
+                Mail::to($shop->emailAddress)->send(new ShopOwnerNotificationMail($order, $orderItems));
             }
         }
 
