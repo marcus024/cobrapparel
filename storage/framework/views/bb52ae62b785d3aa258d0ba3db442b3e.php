@@ -40,16 +40,16 @@
                 <?php
                     $statusCounts = DB::table('orders')
                         ->select('status', DB::raw('COUNT(*) as count'))
-                        ->whereIn('status', ['Pending', 'In Production', 'Completed'])
+                        ->whereIn('status', ['Paid', 'In Production', 'Completed'])
                         ->groupBy('status')
                         ->pluck('count', 'status');
                 ?>
                 <div class="flex lg:flex-row w-auto mt-2 justify-between">
                     <p class="text-black font-medium text-xm lg:mr-5">
-                        Pending
+                        Paid
                     </p>
                     <p class="text-black font-bold text-xm">
-                        <?php echo e($statusCounts['Pending'] ?? 0); ?>
+                        <?php echo e($statusCounts['Paid'] ?? 0); ?>
 
                     </p>
                 </div>

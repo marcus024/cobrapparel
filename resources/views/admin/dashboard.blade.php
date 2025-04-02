@@ -177,6 +177,10 @@
             </div>
             <div class="flex lg:flex-col w-auto mt-2 py-2 px-4 justify-between">
                 <div class="lg:w-auto lg:h-auto pr-2">
+                    @php
+                        ksort($groupedItems); // Sorts the array by product name (keys)
+                    @endphp
+
                     @foreach($groupedItems as $productName => $item)
                         <div class="flex lg:flex-row w-auto mt-2 justify-between">
                             <p class="text-black font-semibold text-lg">{{ $item['quantity'] }} x</p>
