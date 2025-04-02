@@ -168,8 +168,11 @@
                     'quantity' => $group->sum('quantity'),
                     'price' => $group->first()->price,
                 ];
-            });
-            $totalRevenue = $groupedItems->sum(fn($item) => $item['quantity'] * $item['price']);
+            })->toArray(); // Convert to array for sorting
+            
+            ksort($groupedItems); // Sort by product name (A-Z)
+
+            $totalRevenue = array_sum(array_map(fn($item) => $item['quantity'] * $item['price'], $groupedItems));
         ?>
 
         <div class="bg-gray-200 text-white rounded-lg shadow-md lg:w-full mb-5">
@@ -200,6 +203,7 @@
             </div>
         </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 </div>
 </div>
 <?php $__env->stopSection(); ?>
